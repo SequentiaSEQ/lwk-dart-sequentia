@@ -154,8 +154,8 @@ impl Address {
             &script_pubkey,
             blinding_key,
             match network {
-                Network::Mainnet => &AddressParams::LIQUID,
-                Network::Testnet => &AddressParams::LIQUID_TESTNET,
+                Network::Mainnet => &AddressParams::SEQUENTIA,
+                Network::Testnet => &AddressParams::SEQUENTIA_TESTNET,
             },
         );
         if address.is_none() {

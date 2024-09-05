@@ -652,9 +652,8 @@ dependencies = [
 
 [[package]]
 name = "elements"
-version = "0.24.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd6b8388053196e6b2702a45418078a654680ce9e1fd91799f51f67a40118ff5"
+version = "0.24.0"
+source = "git+https://github.com/SequentiaSEQ/rust-sequentia?rev=c824a874aba0d1d298e2ce5da33a787893a320dc#c824a874aba0d1d298e2ce5da33a787893a320dc"
 dependencies = [
  "bitcoin",
  "secp256k1-zkp",
@@ -665,8 +664,7 @@ dependencies = [
 [[package]]
 name = "elements-miniscript"
 version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd2c9c3a0acd5a30061dc5f1859b816ef01d320da66d074d9e23aad40e7a7eba"
+source = "git+https://github.com/SequentiaSEQ/sequentia-miniscript?rev=5a24391c59b3935a3d562d817c80614cceda5adf#5a24391c59b3935a3d562d817c80614cceda5adf"
 dependencies = [
  "bitcoin",
  "elements",
@@ -1457,8 +1455,7 @@ checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 [[package]]
 name = "lwk_common"
 version = "0.5.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2c34354811d24b6bfd94fce8f1d3a611e034dbc91489f6be5192c0e8cda0998"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
 dependencies = [
  "base64 0.21.7",
  "elements",
@@ -1488,8 +1485,7 @@ dependencies = [
 [[package]]
 name = "lwk_jade"
 version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93707e1dfd7e5eda8f13f2587376e91d6b82061bb820b0d81c1f1f9ffed5cb9a"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
 dependencies = [
  "elements",
  "elements-miniscript",
@@ -1509,8 +1505,7 @@ dependencies = [
 [[package]]
 name = "lwk_signer"
 version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74a34fedb7cfb3e7746273bfe02d10d489b16413f291f04afd9410e6979dce6e"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
 dependencies = [
  "base64 0.13.1",
  "bip39",
@@ -1523,8 +1518,7 @@ dependencies = [
 [[package]]
 name = "lwk_wollet"
 version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23e38fe0faf119f2cf6fb95f4ed3712ce694a1ec791e1c419097f4cbeb49a83e"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
 dependencies = [
  "aes-gcm-siv",
  "base64 0.21.7",
