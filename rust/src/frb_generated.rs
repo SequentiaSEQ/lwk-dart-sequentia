@@ -948,6 +948,7 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::Network {
         match self {
             Self::Mainnet => 0.into_dart(),
             Self::Testnet => 1.into_dart(),
+            Self::Regtest => 2.into_dart(),
         }
     }
 }

@@ -14,13 +14,15 @@ use lwk_wollet::ElementsNetwork;
 pub enum Network {
     Mainnet,
     Testnet,
+    Regtest,
 }
 
 impl Into<ElementsNetwork> for Network {
     fn into(self) -> ElementsNetwork {
         match self {
-            Network::Mainnet => ElementsNetwork::Liquid,
-            Network::Testnet => ElementsNetwork::LiquidTestnet,
+            Network::Mainnet => ElementsNetwork::Sequentia,
+            Network::Testnet => ElementsNetwork::SequentiaTestnet,
+            Network::Regtest => ElementsNetwork::SequentiaTestnet,
         }
     }
 }
@@ -156,6 +158,7 @@ impl Address {
             match network {
                 Network::Mainnet => &AddressParams::SEQUENTIA,
                 Network::Testnet => &AddressParams::SEQUENTIA_TESTNET,
+                Network::Regtest => &AddressParams::SEQUENTIA_REGTEST,
             },
         );
         if address.is_none() {

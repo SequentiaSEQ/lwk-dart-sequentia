@@ -38,7 +38,7 @@ panic = "abort"
 [patch.crates-io]
 elements = { git = "https://github.com/SequentiaSEQ/rust-sequentia", rev = "c824a874aba0d1d298e2ce5da33a787893a320dc" }
 elements-miniscript = { git = "https://github.com/SequentiaSEQ/sequentia-miniscript", rev = "5a24391c59b3935a3d562d817c80614cceda5adf" }
-lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
+lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "3e482e4ae10c796419b876169f4775f7d4c2f8a2" }
+lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "3e482e4ae10c796419b876169f4775f7d4c2f8a2" }
+lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "3e482e4ae10c796419b876169f4775f7d4c2f8a2" }
+lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "3e482e4ae10c796419b876169f4775f7d4c2f8a2" }
