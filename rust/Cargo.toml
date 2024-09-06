@@ -36,9 +36,9 @@ panic = "abort"
 
 # Use Sequentia fork of rust-elements
 [patch.crates-io]
-elements = { git = "https://github.com/SequentiaSEQ/rust-sequentia", rev = "c824a874aba0d1d298e2ce5da33a787893a320dc" }
-elements-miniscript = { git = "https://github.com/SequentiaSEQ/sequentia-miniscript", rev = "5a24391c59b3935a3d562d817c80614cceda5adf" }
-lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
-lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "b64f4770e4160156954e534af5839fc4b6faf8e2" }
+elements = { git = "https://github.com/SequentiaSEQ/rust-sequentia", rev = "642df38b8ffe642ad051cfc011b2560976fca610" }
+elements-miniscript = { git = "https://github.com/SequentiaSEQ/sequentia-miniscript", rev = "8b4379e28a03bc6480aaee7e2a7d4de27ece47f2" }
+lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "752086077aea80f71aaa8b6f0b2b22b8bce4608d" }
+lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "752086077aea80f71aaa8b6f0b2b22b8bce4608d" }
+lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "752086077aea80f71aaa8b6f0b2b22b8bce4608d" }
+lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", rev = "752086077aea80f71aaa8b6f0b2b22b8bce4608d" }

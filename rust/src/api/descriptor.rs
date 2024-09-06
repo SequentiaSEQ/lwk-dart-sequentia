@@ -12,7 +12,7 @@ pub struct Descriptor {
 impl Descriptor {
     pub fn new_confidential(network: Network, mnemonic: String) -> Result<Descriptor, LwkError> {
         let el_network: ElementsNetwork = network.into();
-        let is_mainnet = el_network == ElementsNetwork::Liquid;
+        let is_mainnet = el_network == ElementsNetwork::Sequentia;
         let signer: SwSigner = SwSigner::new(&mnemonic, is_mainnet)?.into();
         let script_variant = lwk_common::Singlesig::Wpkh;
         let blinding_variant = lwk_common::DescriptorBlindingKey::Slip77;

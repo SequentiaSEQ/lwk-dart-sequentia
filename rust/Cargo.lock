@@ -653,7 +653,7 @@ dependencies = [
 [[package]]
 name = "elements"
 version = "0.24.0"
-source = "git+https://github.com/SequentiaSEQ/rust-sequentia?rev=c824a874aba0d1d298e2ce5da33a787893a320dc#c824a874aba0d1d298e2ce5da33a787893a320dc"
+source = "git+https://github.com/SequentiaSEQ/rust-sequentia?rev=642df38b8ffe642ad051cfc011b2560976fca610#642df38b8ffe642ad051cfc011b2560976fca610"
 dependencies = [
  "bitcoin",
  "secp256k1-zkp",
@@ -664,7 +664,7 @@ dependencies = [
 [[package]]
 name = "elements-miniscript"
 version = "0.3.1"
-source = "git+https://github.com/SequentiaSEQ/sequentia-miniscript?rev=5a24391c59b3935a3d562d817c80614cceda5adf#5a24391c59b3935a3d562d817c80614cceda5adf"
+source = "git+https://github.com/SequentiaSEQ/sequentia-miniscript?rev=8b4379e28a03bc6480aaee7e2a7d4de27ece47f2#8b4379e28a03bc6480aaee7e2a7d4de27ece47f2"
 dependencies = [
  "bitcoin",
  "elements",
@@ -1455,7 +1455,7 @@ checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 [[package]]
 name = "lwk_common"
 version = "0.5.2"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=752086077aea80f71aaa8b6f0b2b22b8bce4608d#752086077aea80f71aaa8b6f0b2b22b8bce4608d"
 dependencies = [
  "base64 0.21.7",
  "elements",
@@ -1485,7 +1485,7 @@ dependencies = [
 [[package]]
 name = "lwk_jade"
 version = "0.5.1"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=752086077aea80f71aaa8b6f0b2b22b8bce4608d#752086077aea80f71aaa8b6f0b2b22b8bce4608d"
 dependencies = [
  "elements",
  "elements-miniscript",
@@ -1505,7 +1505,7 @@ dependencies = [
 [[package]]
 name = "lwk_signer"
 version = "0.5.1"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=752086077aea80f71aaa8b6f0b2b22b8bce4608d#752086077aea80f71aaa8b6f0b2b22b8bce4608d"
 dependencies = [
  "base64 0.13.1",
  "bip39",
@@ -1518,7 +1518,7 @@ dependencies = [
 [[package]]
 name = "lwk_wollet"
 version = "0.5.1"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=b64f4770e4160156954e534af5839fc4b6faf8e2#b64f4770e4160156954e534af5839fc4b6faf8e2"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?rev=752086077aea80f71aaa8b6f0b2b22b8bce4608d#752086077aea80f71aaa8b6f0b2b22b8bce4608d"
 dependencies = [
  "aes-gcm-siv",
  "base64 0.21.7",

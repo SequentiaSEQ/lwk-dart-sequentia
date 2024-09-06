@@ -19,8 +19,8 @@ pub enum Network {
 impl Into<ElementsNetwork> for Network {
     fn into(self) -> ElementsNetwork {
         match self {
-            Network::Mainnet => ElementsNetwork::Liquid,
-            Network::Testnet => ElementsNetwork::LiquidTestnet,
+            Network::Mainnet => ElementsNetwork::Sequentia,
+            Network::Testnet => ElementsNetwork::SequentiaTestnet,
         }
     }
 }
