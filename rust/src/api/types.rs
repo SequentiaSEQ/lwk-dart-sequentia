@@ -298,7 +298,7 @@ pub struct Blockchain {}
 
 impl Blockchain {
     pub fn test(&self, electrum_url: String) -> anyhow::Result<(), LwkError> {
-        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, false))?;
+        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         Ok(())
     }
 }
