@@ -8,7 +8,7 @@ edition = "2021"
 [lib]
 name = "lwk_dart"
 doctest = false
-crate-type = ["staticlib", "cdylib"] 
+crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
 lwk_wollet = { version = "0.5.1" }
@@ -33,3 +33,12 @@ opt-level = "z"
 lto = true
 codegen-units = 1
 panic = "abort"
+
+# Use Sequentia fork of rust-elements
+[patch.crates-io]
+elements = { git = "https://github.com/SequentiaSEQ/rust-sequentia", branch = "0.24.0" }
+elements-miniscript = { git = "https://github.com/SequentiaSEQ/sequentia-miniscript" }
+lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
+lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
+lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
+lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }

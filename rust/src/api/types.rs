@@ -19,8 +19,8 @@ pub enum Network {
 impl Into<ElementsNetwork> for Network {
     fn into(self) -> ElementsNetwork {
         match self {
-            Network::Mainnet => ElementsNetwork::Liquid,
-            Network::Testnet => ElementsNetwork::LiquidTestnet,
+            Network::Mainnet => ElementsNetwork::Sequentia,
+            Network::Testnet => ElementsNetwork::SequentiaTestnet,
         }
     }
 }
@@ -154,8 +154,8 @@ impl Address {
             &script_pubkey,
             blinding_key,
             match network {
-                Network::Mainnet => &AddressParams::LIQUID,
-                Network::Testnet => &AddressParams::LIQUID_TESTNET,
+                Network::Mainnet => &AddressParams::SEQUENTIA,
+                Network::Testnet => &AddressParams::SEQUENTIA_TESTNET,
             },
         );
         if address.is_none() {
@@ -298,7 +298,7 @@ pub struct Blockchain {}
 
 impl Blockchain {
     pub fn test(&self, electrum_url: String) -> anyhow::Result<(), LwkError> {
-        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, false))?;
+        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         Ok(())
     }
 }
