@@ -136,6 +136,7 @@ impl Wallet {
         out_address: String,
         fee_rate: f32,
         asset: String,
+        fee_asset: Option<String>
     ) -> anyhow::Result<String, LwkError> {
         let wallet = self.get_wallet()?;
         let tx_builder = wallet.tx_builder();
@@ -144,6 +145,7 @@ impl Wallet {
         let pset = tx_builder
             .add_recipient(&address, sats, asset)?
             .fee_rate(Some(fee_rate))
+            .fee_asset(fee_asset)
             .finish()?;
         Ok(pset.to_string())
     }

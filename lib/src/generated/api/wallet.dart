@@ -59,6 +59,7 @@ class Wallet {
           required String outAddress,
           required double feeRate,
           required String asset,
+          String? feeAsset,
           dynamic hint}) =>
       LwkCore.instance.api.walletBuildAssetTx(
           that: this,
@@ -66,6 +67,7 @@ class Wallet {
           outAddress: outAddress,
           feeRate: feeRate,
           asset: asset,
+          feeAsset: feeAsset,
           hint: hint);
 
   Future<String> buildLbtcTx(

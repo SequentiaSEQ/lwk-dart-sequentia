@@ -440,8 +440,9 @@ pub extern "C" fn frbgen_lwk_dart_wire_wallet_build_asset_tx(
     out_address: *mut wire_cst_list_prim_u_8_strict,
     fee_rate: f32,
     asset: *mut wire_cst_list_prim_u_8_strict,
+    fee_asset: *mut wire_cst_list_prim_u_8_strict,
 ) {
-    wire_wallet_build_asset_tx_impl(port_, that, sats, out_address, fee_rate, asset)
+    wire_wallet_build_asset_tx_impl(port_, that, sats, out_address, fee_rate, asset, fee_asset)
 }
 
 #[no_mangle]

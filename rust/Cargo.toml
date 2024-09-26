@@ -38,7 +38,7 @@ panic = "abort"
 [patch.crates-io]
 elements = { git = "https://github.com/SequentiaSEQ/rust-sequentia", branch = "0.24.0" }
 elements-miniscript = { git = "https://github.com/SequentiaSEQ/sequentia-miniscript" }
-lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
-lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
-lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
-lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "0.5.1" }
+lwk_common = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "feature/fee_asset" }
+lwk_jade = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "feature/fee_asset" }
+lwk_signer = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "feature/fee_asset" }
+lwk_wollet = { git = "https://github.com/SequentiaSEQ/lwk-sequentia", branch = "feature/fee_asset" }

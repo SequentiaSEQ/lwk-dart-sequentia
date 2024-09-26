@@ -97,6 +97,7 @@ abstract class LwkCoreApi extends BaseApi {
       required String outAddress,
       required double feeRate,
       required String asset,
+      String? feeAsset,
       dynamic hint});
 
   Future<String> walletBuildLbtcTx(
@@ -386,6 +387,7 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
       required String outAddress,
       required double feeRate,
       required String asset,
+      String? feeAsset,
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -394,15 +396,16 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
         var arg2 = cst_encode_String(outAddress);
         var arg3 = cst_encode_f_32(feeRate);
         var arg4 = cst_encode_String(asset);
+        var arg5 = cst_encode_opt_String(feeAsset);
         return wire.wire_wallet_build_asset_tx(
-            port_, arg0, arg1, arg2, arg3, arg4);
+            port_, arg0, arg1, arg2, arg3, arg4, arg5);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_String,
         decodeErrorData: dco_decode_lwk_error,
       ),
       constMeta: kWalletBuildAssetTxConstMeta,
-      argValues: [that, sats, outAddress, feeRate, asset],
+      argValues: [that, sats, outAddress, feeRate, asset, feeAsset],
       apiImpl: this,
       hint: hint,
     ));
@@ -410,7 +413,14 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
 
   TaskConstMeta get kWalletBuildAssetTxConstMeta => const TaskConstMeta(
         debugName: "wallet_build_asset_tx",
-        argNames: ["that", "sats", "outAddress", "feeRate", "asset"],
+        argNames: [
+          "that",
+          "sats",
+          "outAddress",
+          "feeRate",
+          "asset",
+          "feeAsset"
+        ],
       );
 
   @override
@@ -821,6 +831,12 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   }
 
   @protected
+  String? dco_decode_opt_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
@@ -1097,6 +1113,17 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_32(deserializer);
     return Network.values[inner];
+  }
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
   }
 
   @protected
@@ -1414,6 +1441,16 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   void sse_encode_network(Network self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_String(self, serializer);
+    }
   }
 
   @protected

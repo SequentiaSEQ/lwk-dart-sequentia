@@ -240,6 +240,7 @@ fn wire_wallet_build_asset_tx_impl(
     out_address: impl CstDecode<String>,
     fee_rate: impl CstDecode<f32>,
     asset: impl CstDecode<String>,
+    fee_asset: impl CstDecode<Option<String>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -253,6 +254,7 @@ fn wire_wallet_build_asset_tx_impl(
             let api_out_address = out_address.cst_decode();
             let api_fee_rate = fee_rate.cst_decode();
             let api_asset = asset.cst_decode();
+            let api_fee_asset = fee_asset.cst_decode();
             move |context| {
                 transform_result_dco((move || {
                     crate::api::wallet::Wallet::build_asset_tx(
@@ -261,6 +263,7 @@ fn wire_wallet_build_asset_tx_impl(
                         api_out_address,
                         api_fee_rate,
                         api_asset,
+                        api_fee_asset,
                     )
                 })())
             }
@@ -698,6 +701,17 @@ impl SseDecode for crate::api::types::Network {
             1 => crate::api::types::Network::Testnet,
             _ => unreachable!("Invalid variant for Network: {}", inner),
         };
+    }
+}
+
+impl SseDecode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<String>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
     }
 }
 
@@ -1207,6 +1221,16 @@ impl SseEncode for crate::api::types::Network {
             },
             serializer,
         );
+    }
+}
+
+impl SseEncode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <String>::sse_encode(value, serializer);
+        }
     }
 }
 

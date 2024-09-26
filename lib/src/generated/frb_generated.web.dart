@@ -88,6 +88,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   Network dco_decode_network(dynamic raw);
 
   @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -186,6 +189,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   Network sse_decode_network(SseDeserializer deserializer);
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
@@ -321,6 +327,12 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   List<dynamic> cst_encode_lwk_error(LwkError raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [cst_encode_String(raw.msg)];
+  }
+
+  @protected
+  String? cst_encode_opt_String(String? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? null : cst_encode_String(raw);
   }
 
   @protected
@@ -490,6 +502,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   void sse_encode_network(Network self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
@@ -565,10 +580,16 @@ class LwkCoreWire implements BaseWire {
           NativePortType port_, String electrum_url, List<int> tx_bytes) =>
       wasmModule.wire_wallet_broadcast_tx(port_, electrum_url, tx_bytes);
 
-  void wire_wallet_build_asset_tx(NativePortType port_, List<dynamic> that,
-          Object sats, String out_address, double fee_rate, String asset) =>
+  void wire_wallet_build_asset_tx(
+          NativePortType port_,
+          List<dynamic> that,
+          Object sats,
+          String out_address,
+          double fee_rate,
+          String asset,
+          String? fee_asset) =>
       wasmModule.wire_wallet_build_asset_tx(
-          port_, that, sats, out_address, fee_rate, asset);
+          port_, that, sats, out_address, fee_rate, asset, fee_asset);
 
   void wire_wallet_build_lbtc_tx(NativePortType port_, List<dynamic> that,
           Object sats, String out_address, double fee_rate, bool drain) =>
@@ -662,7 +683,8 @@ class LwkCoreWasmModule implements WasmModule {
       Object sats,
       String out_address,
       double fee_rate,
-      String asset);
+      String asset,
+      String? fee_asset);
 
   external void wire_wallet_build_lbtc_tx(
       NativePortType port_,

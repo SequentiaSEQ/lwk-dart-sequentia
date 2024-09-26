@@ -89,6 +89,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   Network dco_decode_network(dynamic raw);
 
   @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -187,6 +190,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   Network sse_decode_network(SseDeserializer deserializer);
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
@@ -315,6 +321,13 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
       cst_api_fill_to_wire_tx_out(raw[i], ans.ref.ptr[i]);
     }
     return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_opt_String(
+      String? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_String(raw);
   }
 
   @protected
@@ -513,6 +526,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   void sse_encode_network(Network self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
@@ -782,6 +798,7 @@ class LwkCoreWire implements BaseWire {
     ffi.Pointer<wire_cst_list_prim_u_8_strict> out_address,
     double fee_rate,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> fee_asset,
   ) {
     return _wire_wallet_build_asset_tx(
       port_,
@@ -790,6 +807,7 @@ class LwkCoreWire implements BaseWire {
       out_address,
       fee_rate,
       asset,
+      fee_asset,
     );
   }
 
@@ -801,6 +819,7 @@ class LwkCoreWire implements BaseWire {
                   ffi.Uint64,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Float,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_lwk_dart_wire_wallet_build_asset_tx');
   late final _wire_wallet_build_asset_tx =
@@ -811,6 +830,7 @@ class LwkCoreWire implements BaseWire {
               int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               double,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
   void wire_wallet_build_lbtc_tx(
