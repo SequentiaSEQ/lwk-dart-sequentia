@@ -475,6 +475,7 @@ mixin _$Tx {
   List<TxOut> get outputs => throw _privateConstructorUsedError;
   List<TxOut> get inputs => throw _privateConstructorUsedError;
   int get fee => throw _privateConstructorUsedError;
+  String get feeAsset => throw _privateConstructorUsedError;
   int? get height => throw _privateConstructorUsedError;
   String get unblindedUrl => throw _privateConstructorUsedError;
   int get vsize => throw _privateConstructorUsedError;
@@ -498,6 +499,7 @@ abstract class $TxCopyWith<$Res> {
       List<TxOut> outputs,
       List<TxOut> inputs,
       int fee,
+      String feeAsset,
       int? height,
       String unblindedUrl,
       int vsize});
@@ -524,6 +526,7 @@ class _$TxCopyWithImpl<$Res, $Val extends Tx> implements $TxCopyWith<$Res> {
     Object? outputs = null,
     Object? inputs = null,
     Object? fee = null,
+    Object? feeAsset = null,
     Object? height = freezed,
     Object? unblindedUrl = null,
     Object? vsize = null,
@@ -557,6 +560,10 @@ class _$TxCopyWithImpl<$Res, $Val extends Tx> implements $TxCopyWith<$Res> {
           ? _value.fee
           : fee // ignore: cast_nullable_to_non_nullable
               as int,
+      feeAsset: null == feeAsset
+          ? _value.feeAsset
+          : feeAsset // ignore: cast_nullable_to_non_nullable
+              as String,
       height: freezed == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -587,6 +594,7 @@ abstract class _$$TxImplCopyWith<$Res> implements $TxCopyWith<$Res> {
       List<TxOut> outputs,
       List<TxOut> inputs,
       int fee,
+      String feeAsset,
       int? height,
       String unblindedUrl,
       int vsize});
@@ -610,6 +618,7 @@ class __$$TxImplCopyWithImpl<$Res> extends _$TxCopyWithImpl<$Res, _$TxImpl>
     Object? outputs = null,
     Object? inputs = null,
     Object? fee = null,
+    Object? feeAsset = null,
     Object? height = freezed,
     Object? unblindedUrl = null,
     Object? vsize = null,
@@ -643,6 +652,10 @@ class __$$TxImplCopyWithImpl<$Res> extends _$TxCopyWithImpl<$Res, _$TxImpl>
           ? _value.fee
           : fee // ignore: cast_nullable_to_non_nullable
               as int,
+      feeAsset: null == feeAsset
+          ? _value.feeAsset
+          : feeAsset // ignore: cast_nullable_to_non_nullable
+              as String,
       height: freezed == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -670,6 +683,7 @@ class _$TxImpl implements _Tx {
       required final List<TxOut> outputs,
       required final List<TxOut> inputs,
       required this.fee,
+      required this.feeAsset,
       this.height,
       required this.unblindedUrl,
       required this.vsize})
@@ -710,6 +724,8 @@ class _$TxImpl implements _Tx {
   @override
   final int fee;
   @override
+  final String feeAsset;
+  @override
   final int? height;
   @override
   final String unblindedUrl;
@@ -718,7 +734,7 @@ class _$TxImpl implements _Tx {
 
   @override
   String toString() {
-    return 'Tx(timestamp: $timestamp, kind: $kind, balances: $balances, txid: $txid, outputs: $outputs, inputs: $inputs, fee: $fee, height: $height, unblindedUrl: $unblindedUrl, vsize: $vsize)';
+    return 'Tx(timestamp: $timestamp, kind: $kind, balances: $balances, txid: $txid, outputs: $outputs, inputs: $inputs, fee: $fee, feeAsset: $feeAsset, height: $height, unblindedUrl: $unblindedUrl, vsize: $vsize)';
   }
 
   @override
@@ -734,6 +750,8 @@ class _$TxImpl implements _Tx {
             const DeepCollectionEquality().equals(other._outputs, _outputs) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             (identical(other.fee, fee) || other.fee == fee) &&
+            (identical(other.feeAsset, feeAsset) ||
+                other.feeAsset == feeAsset) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.unblindedUrl, unblindedUrl) ||
                 other.unblindedUrl == unblindedUrl) &&
@@ -750,6 +768,7 @@ class _$TxImpl implements _Tx {
       const DeepCollectionEquality().hash(_outputs),
       const DeepCollectionEquality().hash(_inputs),
       fee,
+      feeAsset,
       height,
       unblindedUrl,
       vsize);
@@ -772,6 +791,7 @@ abstract class _Tx implements Tx {
       required final List<TxOut> outputs,
       required final List<TxOut> inputs,
       required final int fee,
+      required final String feeAsset,
       final int? height,
       required final String unblindedUrl,
       required final int vsize}) = _$TxImpl;
@@ -790,6 +810,8 @@ abstract class _Tx implements Tx {
   List<TxOut> get inputs;
   @override
   int get fee;
+  @override
+  String get feeAsset;
   @override
   int? get height;
   @override

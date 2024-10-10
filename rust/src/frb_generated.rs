@@ -760,6 +760,7 @@ impl SseDecode for crate::api::types::Tx {
         let mut var_outputs = <Vec<crate::api::types::TxOut>>::sse_decode(deserializer);
         let mut var_inputs = <Vec<crate::api::types::TxOut>>::sse_decode(deserializer);
         let mut var_fee = <u64>::sse_decode(deserializer);
+        let mut var_feeAsset = <String>::sse_decode(deserializer);
         let mut var_height = <Option<u32>>::sse_decode(deserializer);
         let mut var_unblindedUrl = <String>::sse_decode(deserializer);
         let mut var_vsize = <usize>::sse_decode(deserializer);
@@ -771,6 +772,7 @@ impl SseDecode for crate::api::types::Tx {
             outputs: var_outputs,
             inputs: var_inputs,
             fee: var_fee,
+            fee_asset: var_feeAsset,
             height: var_height,
             unblinded_url: var_unblindedUrl,
             vsize: var_vsize,
@@ -1021,6 +1023,7 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::Tx {
             self.outputs.into_into_dart().into_dart(),
             self.inputs.into_into_dart().into_dart(),
             self.fee.into_into_dart().into_dart(),
+            self.fee_asset.into_into_dart().into_dart(),
             self.height.into_into_dart().into_dart(),
             self.unblinded_url.into_into_dart().into_dart(),
             self.vsize.into_into_dart().into_dart(),
@@ -1270,6 +1273,7 @@ impl SseEncode for crate::api::types::Tx {
         <Vec<crate::api::types::TxOut>>::sse_encode(self.outputs, serializer);
         <Vec<crate::api::types::TxOut>>::sse_encode(self.inputs, serializer);
         <u64>::sse_encode(self.fee, serializer);
+        <String>::sse_encode(self.fee_asset, serializer);
         <Option<u32>>::sse_encode(self.height, serializer);
         <String>::sse_encode(self.unblinded_url, serializer);
         <usize>::sse_encode(self.vsize, serializer);
