@@ -3,7 +3,7 @@ use elements::Address as LwkAddress;
 use elements::{secp256k1_zkp, AddressParams, AssetId, Script};
 use flutter_rust_bridge::frb;
 use lwk_common::PsetBalance;
-use lwk_wollet::{AddressResult, BlockchainBackend, ElectrumClient, WalletTx, WalletTxOut};
+use lwk_wollet::{AddressResult, ElectrumClient, WalletTx, WalletTxOut};
 use std::collections::{BTreeMap, HashMap};
 use std::str::FromStr;
 
@@ -58,7 +58,6 @@ impl From<AssetIdHashMapInt> for Balances {
 }
 
 use std::convert::TryFrom;
-use std::time::{SystemTime, UNIX_EPOCH};
 
 use super::error::LwkError;
 
