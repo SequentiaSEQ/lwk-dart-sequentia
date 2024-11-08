@@ -17,8 +17,8 @@ pub enum Network {
 impl Into<ElementsNetwork> for Network {
     fn into(self) -> ElementsNetwork {
         match self {
-            Network::Mainnet => ElementsNetwork::Liquid,
-            Network::Testnet => ElementsNetwork::LiquidTestnet,
+            Network::Mainnet => ElementsNetwork::Sequentia,
+            Network::Testnet => ElementsNetwork::SequentiaTestnet,
         }
     }
 }
@@ -144,7 +144,7 @@ impl From<AddressResult> for Address {
 impl Address {
     pub fn validate(address_string: String) -> anyhow::Result<Network, LwkError> {
         let address = LwkAddress::from_str(&address_string)?;
-        if address.params.to_owned() == AddressParams::LIQUID {
+        if address.params.to_owned() == AddressParams::SEQUENTIA {
             Ok(Network::Mainnet)
         } else {
             Ok(Network::Testnet)
@@ -174,8 +174,8 @@ impl Address {
             &script_pubkey,
             blinding_key,
             match network {
-                Network::Mainnet => &AddressParams::LIQUID,
-                Network::Testnet => &AddressParams::LIQUID_TESTNET,
+                Network::Mainnet => &AddressParams::SEQUENTIA,
+                Network::Testnet => &AddressParams::SEQUENTIA_TESTNET,
             },
         );
         if address.is_none() {
@@ -227,6 +227,7 @@ pub struct Tx {
     pub outputs: Vec<TxOut>,
     pub inputs: Vec<TxOut>,
     pub fee: u64,
+    pub fee_asset: String,
     pub height: Option<u32>,
     pub unblinded_url: String,
     pub vsize: usize,
@@ -287,6 +288,7 @@ impl From<WalletTx> for Tx {
             outputs: outputs,
             inputs: inputs,
             fee: wallet_tx.fee.clone(),
+            fee_asset: wallet_tx.fee_asset.to_string().clone(),
             timestamp: wallet_tx.timestamp,
             height: wallet_tx.height,
             unblinded_url: wallet_tx.unblinded_url("").clone(),
@@ -318,7 +320,7 @@ pub struct Blockchain {}
 
 impl Blockchain {
     pub fn test(&self, electrum_url: String) -> anyhow::Result<(), LwkError> {
-        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, false))?;
+        ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         Ok(())
     }
 }

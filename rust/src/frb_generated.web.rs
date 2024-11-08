@@ -161,6 +161,12 @@ impl CstDecode<crate::api::error::LwkError>
         }
     }
 }
+impl CstDecode<Option<String>> for Option<String> {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> Option<String> {
+        self.map(CstDecode::cst_decode)
+    }
+}
 impl CstDecode<crate::api::types::OutPoint>
     for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
 {
@@ -211,8 +217,8 @@ impl CstDecode<crate::api::types::Tx>
             .unwrap();
         assert_eq!(
             self_.length(),
-            10,
-            "Expected 10 elements, got {}",
+            11,
+            "Expected 11 elements, got {}",
             self_.length()
         );
         crate::api::types::Tx {
@@ -223,9 +229,10 @@ impl CstDecode<crate::api::types::Tx>
             outputs: self_.get(4).cst_decode(),
             inputs: self_.get(5).cst_decode(),
             fee: self_.get(6).cst_decode(),
-            height: self_.get(7).cst_decode(),
-            unblinded_url: self_.get(8).cst_decode(),
-            vsize: self_.get(9).cst_decode(),
+            fee_asset: self_.get(7).cst_decode(),
+            height: self_.get(8).cst_decode(),
+            unblinded_url: self_.get(9).cst_decode(),
+            vsize: self_.get(10).cst_decode(),
         }
     }
 }
@@ -461,6 +468,7 @@ pub fn wire__crate__api__wallet__wallet_build_asset_tx(
     out_address: String,
     fee_rate: f32,
     asset: String,
+    fee_asset: Option<String>,
 ) {
     wire__crate__api__wallet__wallet_build_asset_tx_impl(
         port_,
@@ -469,6 +477,7 @@ pub fn wire__crate__api__wallet__wallet_build_asset_tx(
         out_address,
         fee_rate,
         asset,
+        fee_asset,
     )
 }
 

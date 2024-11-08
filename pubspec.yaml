@@ -49,4 +49,4 @@ flutter:
       macos:
         ffiPlugin: true
       linux:
-        ffiPlugin: true 
+        ffiPlugin: true

@@ -48,13 +48,15 @@ class Wallet {
           {required BigInt sats,
           required String outAddress,
           required double feeRate,
-          required String asset}) =>
+          required String asset,
+          String? feeAsset}) =>
       LwkCore.instance.api.crateApiWalletWalletBuildAssetTx(
           that: this,
           sats: sats,
           outAddress: outAddress,
           feeRate: feeRate,
-          asset: asset);
+          asset: asset,
+          feeAsset: feeAsset);
 
   Future<String> buildLbtcTx(
           {required BigInt sats,

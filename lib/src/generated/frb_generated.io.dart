@@ -89,6 +89,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   Network dco_decode_network(dynamic raw);
 
   @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -187,6 +190,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   Network sse_decode_network(SseDeserializer deserializer);
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
@@ -318,6 +324,13 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   }
 
   @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_opt_String(
+      String? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_String(raw);
+  }
+
+  @protected
   ffi.Pointer<ffi.Uint32> cst_encode_opt_box_autoadd_u_32(int? raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw == null ? ffi.nullptr : cst_encode_box_autoadd_u_32(raw);
@@ -399,6 +412,7 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
     wireObj.outputs = cst_encode_list_tx_out(apiObj.outputs);
     wireObj.inputs = cst_encode_list_tx_out(apiObj.inputs);
     wireObj.fee = cst_encode_u_64(apiObj.fee);
+    wireObj.fee_asset = cst_encode_String(apiObj.feeAsset);
     wireObj.height = cst_encode_opt_box_autoadd_u_32(apiObj.height);
     wireObj.unblinded_url = cst_encode_String(apiObj.unblindedUrl);
     wireObj.vsize = cst_encode_usize(apiObj.vsize);
@@ -516,6 +530,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   void sse_encode_network(Network self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
@@ -792,6 +809,7 @@ class LwkCoreWire implements BaseWire {
     ffi.Pointer<wire_cst_list_prim_u_8_strict> out_address,
     double fee_rate,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> fee_asset,
   ) {
     return _wire__crate__api__wallet__wallet_build_asset_tx(
       port_,
@@ -800,6 +818,7 @@ class LwkCoreWire implements BaseWire {
       out_address,
       fee_rate,
       asset,
+      fee_asset,
     );
   }
 
@@ -811,6 +830,7 @@ class LwkCoreWire implements BaseWire {
                   ffi.Uint64,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Float,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_lwk_dart_wire__crate__api__wallet__wallet_build_asset_tx');
   late final _wire__crate__api__wallet__wallet_build_asset_tx =
@@ -821,6 +841,7 @@ class LwkCoreWire implements BaseWire {
               int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               double,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
   void wire__crate__api__wallet__wallet_build_lbtc_tx(
@@ -1307,6 +1328,8 @@ final class wire_cst_tx extends ffi.Struct {
 
   @ffi.Uint64()
   external int fee;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> fee_asset;
 
   external ffi.Pointer<ffi.Uint32> height;
 

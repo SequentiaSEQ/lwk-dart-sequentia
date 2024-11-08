@@ -524,6 +524,7 @@ class _$TxCopyWithImpl<$Res, $Val extends Tx> implements $TxCopyWith<$Res> {
     Object? outputs = null,
     Object? inputs = null,
     Object? fee = null,
+    Object? feeAsset = null,
     Object? height = freezed,
     Object? unblindedUrl = null,
     Object? vsize = null,
@@ -610,6 +611,7 @@ class __$$TxImplCopyWithImpl<$Res> extends _$TxCopyWithImpl<$Res, _$TxImpl>
     Object? outputs = null,
     Object? inputs = null,
     Object? fee = null,
+    Object? feeAsset = null,
     Object? height = freezed,
     Object? unblindedUrl = null,
     Object? vsize = null,
@@ -670,6 +672,7 @@ class _$TxImpl implements _Tx {
       required final List<TxOut> outputs,
       required final List<TxOut> inputs,
       required this.fee,
+      required this.feeAsset,
       this.height,
       required this.unblindedUrl,
       required this.vsize})
@@ -710,6 +713,8 @@ class _$TxImpl implements _Tx {
   @override
   final BigInt fee;
   @override
+  final String feeAsset;
+  @override
   final int? height;
   @override
   final String unblindedUrl;
@@ -718,7 +723,7 @@ class _$TxImpl implements _Tx {
 
   @override
   String toString() {
-    return 'Tx(timestamp: $timestamp, kind: $kind, balances: $balances, txid: $txid, outputs: $outputs, inputs: $inputs, fee: $fee, height: $height, unblindedUrl: $unblindedUrl, vsize: $vsize)';
+    return 'Tx(timestamp: $timestamp, kind: $kind, balances: $balances, txid: $txid, outputs: $outputs, inputs: $inputs, fee: $fee, feeAsset: $feeAsset, height: $height, unblindedUrl: $unblindedUrl, vsize: $vsize)';
   }
 
   @override
@@ -734,6 +739,8 @@ class _$TxImpl implements _Tx {
             const DeepCollectionEquality().equals(other._outputs, _outputs) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             (identical(other.fee, fee) || other.fee == fee) &&
+            (identical(other.feeAsset, feeAsset) ||
+                other.feeAsset == feeAsset) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.unblindedUrl, unblindedUrl) ||
                 other.unblindedUrl == unblindedUrl) &&
@@ -750,6 +757,7 @@ class _$TxImpl implements _Tx {
       const DeepCollectionEquality().hash(_outputs),
       const DeepCollectionEquality().hash(_inputs),
       fee,
+      feeAsset,
       height,
       unblindedUrl,
       vsize);
@@ -790,6 +798,8 @@ abstract class _Tx implements Tx {
   List<TxOut> get inputs;
   @override
   BigInt get fee;
+  @override
+  String get feeAsset;
   @override
   int? get height;
   @override

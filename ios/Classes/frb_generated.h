@@ -78,6 +78,7 @@ typedef struct wire_cst_tx {
   struct wire_cst_list_tx_out *outputs;
   struct wire_cst_list_tx_out *inputs;
   uint64_t fee;
+  struct wire_cst_list_prim_u_8_strict *fee_asset;
   uint32_t *height;
   struct wire_cst_list_prim_u_8_strict *unblinded_url;
   uintptr_t vsize;
@@ -141,7 +142,8 @@ void frbgen_lwk_dart_wire__crate__api__wallet__wallet_build_asset_tx(int64_t por
                                                                      uint64_t sats,
                                                                      struct wire_cst_list_prim_u_8_strict *out_address,
                                                                      float fee_rate,
-                                                                     struct wire_cst_list_prim_u_8_strict *asset);
+                                                                     struct wire_cst_list_prim_u_8_strict *asset,
+                                                                     struct wire_cst_list_prim_u_8_strict *fee_asset);
 
 void frbgen_lwk_dart_wire__crate__api__wallet__wallet_build_lbtc_tx(int64_t port_,
                                                                     struct wire_cst_wallet *that,
