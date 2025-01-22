@@ -263,6 +263,7 @@ fn wire__crate__api__wallet__wallet_build_asset_tx_impl(
     out_address: impl CstDecode<String>,
     fee_rate: impl CstDecode<f32>,
     asset: impl CstDecode<String>,
+    fee_asset: impl CstDecode<Option<String>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -276,6 +277,7 @@ fn wire__crate__api__wallet__wallet_build_asset_tx_impl(
             let api_out_address = out_address.cst_decode();
             let api_fee_rate = fee_rate.cst_decode();
             let api_asset = asset.cst_decode();
+            let api_fee_asset = fee_asset.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::api::error::LwkError>((move || {
                     let output_ok = crate::api::wallet::Wallet::build_asset_tx(
@@ -284,6 +286,7 @@ fn wire__crate__api__wallet__wallet_build_asset_tx_impl(
                         api_out_address,
                         api_fee_rate,
                         api_asset,
+                        api_fee_asset,
                     )?;
                     Ok(output_ok)
                 })())
@@ -747,6 +750,17 @@ impl SseDecode for crate::api::types::Network {
     }
 }
 
+impl SseDecode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<String>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<u32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -792,6 +806,7 @@ impl SseDecode for crate::api::types::Tx {
         let mut var_outputs = <Vec<crate::api::types::TxOut>>::sse_decode(deserializer);
         let mut var_inputs = <Vec<crate::api::types::TxOut>>::sse_decode(deserializer);
         let mut var_fee = <u64>::sse_decode(deserializer);
+        let mut var_feeAsset = <String>::sse_decode(deserializer);
         let mut var_height = <Option<u32>>::sse_decode(deserializer);
         let mut var_unblindedUrl = <String>::sse_decode(deserializer);
         let mut var_vsize = <usize>::sse_decode(deserializer);
@@ -803,6 +818,7 @@ impl SseDecode for crate::api::types::Tx {
             outputs: var_outputs,
             inputs: var_inputs,
             fee: var_fee,
+            fee_asset: var_feeAsset,
             height: var_height,
             unblinded_url: var_unblindedUrl,
             vsize: var_vsize,
@@ -1054,6 +1070,7 @@ impl flutter_rust_bridge::IntoDart for crate::api::types::Tx {
             self.outputs.into_into_dart().into_dart(),
             self.inputs.into_into_dart().into_dart(),
             self.fee.into_into_dart().into_dart(),
+            self.fee_asset.into_into_dart().into_dart(),
             self.height.into_into_dart().into_dart(),
             self.unblinded_url.into_into_dart().into_dart(),
             self.vsize.into_into_dart().into_dart(),
@@ -1257,6 +1274,16 @@ impl SseEncode for crate::api::types::Network {
     }
 }
 
+impl SseEncode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <String>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<u32> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -1293,6 +1320,7 @@ impl SseEncode for crate::api::types::Tx {
         <Vec<crate::api::types::TxOut>>::sse_encode(self.outputs, serializer);
         <Vec<crate::api::types::TxOut>>::sse_encode(self.inputs, serializer);
         <u64>::sse_encode(self.fee, serializer);
+        <String>::sse_encode(self.fee_asset, serializer);
         <Option<u32>>::sse_encode(self.height, serializer);
         <String>::sse_encode(self.unblinded_url, serializer);
         <usize>::sse_encode(self.vsize, serializer);

@@ -435,9 +435,9 @@ checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
 name = "bitflags"
-version = "2.7.0"
+version = "2.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1be3f42a67d6d345ecd59f675f3f012d6974981560836e938c22b424b85ce1be"
+checksum = "8f68f53c83ab957f72c32642f3868eec03eb974d1fb82e453128456482613d36"
 
 [[package]]
 name = "block-buffer"
@@ -556,9 +556,9 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.2.9"
+version = "1.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8293772165d9345bdaaa39b45b2109591e63fe5e6fbc23c6ff930a048aa310b"
+checksum = "13208fcbb66eaeffe09b99fffbe1af420f00a7b35aa99ad683dfc1aa76145229"
 dependencies = [
  "shlex",
 ]
@@ -627,9 +627,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.26"
+version = "4.5.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8eb5e908ef3a6efbe1ed62520fb7287959888c88485abe072543190ecc66783"
+checksum = "769b0145982b4b48713e01ec42d61614425f27b7058bda7180a3a41f30104796"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -637,9 +637,9 @@ dependencies = [
 
 [[package]]
 name = "clap_builder"
-version = "4.5.26"
+version = "4.5.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "96b01801b5fc6a0a232407abc821660c9c6d25a1cafc0d4f85f29fb8d9afc121"
+checksum = "1b26884eb4b57140e4d2d93652abfa49498b938b3c9179f9fc487b0acc3edad7"
 dependencies = [
  "anstream",
  "anstyle",
@@ -870,7 +870,7 @@ dependencies = [
  "hashbrown 0.14.5",
  "lock_api",
  "once_cell",
- "parking_lot_core 0.9.10",
+ "parking_lot_core",
 ]
 
 [[package]]
@@ -884,7 +884,7 @@ dependencies = [
  "hashbrown 0.14.5",
  "lock_api",
  "once_cell",
- "parking_lot_core 0.9.10",
+ "parking_lot_core",
 ]
 
 [[package]]
@@ -957,8 +957,7 @@ dependencies = [
 [[package]]
 name = "elements"
 version = "0.25.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e8ab681914c4d96235d4c30d6a758f4aeb4eace26837f4995ca84bf7ea3189ea"
+source = "git+https://github.com/SequentiaSEQ/rust-sequentia?branch=sequentia-testnet#3dc61ddb5d1bf1d0b14c0753137f1889d7b7bea4"
 dependencies = [
  "bech32 0.11.0",
  "bitcoin",
@@ -970,8 +969,7 @@ dependencies = [
 [[package]]
 name = "elements-miniscript"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "571fa105690f83c7833df2109eb2e14ca0e62d633d2624ffcb166ff18a3da870"
+source = "git+https://github.com/SequentiaSEQ/sequentia-miniscript?branch=sequentia-testnet#4e07aefc63087ab80886e72c4e8668d1dbdcc3c5"
 dependencies = [
  "bitcoin",
  "elements",
@@ -1395,7 +1393,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "http",
- "indexmap 2.7.0",
+ "indexmap 2.7.1",
  "slab",
  "tokio",
  "tokio-util",
@@ -1628,7 +1626,7 @@ dependencies = [
  "i18n-embed-impl",
  "intl-memoizer",
  "log",
- "parking_lot 0.12.3",
+ "parking_lot",
  "rust-embed",
  "thiserror 1.0.69",
  "unic-langid",
@@ -1867,9 +1865,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "2.7.0"
+version = "2.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62f822373a4fe84d4bb149bf54e584a7f4abec90e072ed49cda0edea5b95471f"
+checksum = "8c9c992b02b5b4c94ea26e32fe5bccb7aa7d9f390ab5c1221ff895bc7ea8b652"
 dependencies = [
  "equivalent",
  "hashbrown 0.15.2",
@@ -1928,15 +1926,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "instant"
-version = "0.1.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0242819d153cba4b4b05a5a8f2a7e9bbf97b6055b2a002b395c96b5ff3c0222"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
 name = "intl-memoizer"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1963,19 +1952,19 @@ checksum = "4b3f7cef34251886990511df1c61443aa928499d598a9473929ab5a90a527304"
 
 [[package]]
 name = "ipnet"
-version = "2.10.1"
+version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ddc24109865250148c2e0f3d25d4f0f479571723792d3802153c60922a4fb708"
+checksum = "469fb0b9cefa57e3ef31275ee7cacb78f2fdca44e4765491884a2b119d4eb130"
 
 [[package]]
 name = "is-terminal"
-version = "0.4.13"
+version = "0.4.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "261f68e344040fbd0edea105bef17c66edf46f984ddb1115b775ce31be948f4b"
+checksum = "e19b23d53f35ce9f56aebc7d1bb4e6ac1e9c0db7ac85c8d1760c04379edced37"
 dependencies = [
  "hermit-abi 0.4.0",
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2059,9 +2048,9 @@ version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c0ff37bd590ca25063e35af745c343cb7a0271906fb7b37e4813e8f79f00268d"
 dependencies = [
- "bitflags 2.7.0",
+ "bitflags 2.8.0",
  "libc",
- "redox_syscall 0.5.8",
+ "redox_syscall",
 ]
 
 [[package]]
@@ -2117,8 +2106,7 @@ dependencies = [
 [[package]]
 name = "lwk_common"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7a47f891714f551516c658fa54e6f981eb2ec6e942ab837fe19c1a19fb5b238"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#7f3d4eb7796de2ab20d77a8b69697d1317ba6afc"
 dependencies = [
  "base64 0.21.7",
  "elements",
@@ -2132,8 +2120,7 @@ dependencies = [
 [[package]]
 name = "lwk_containers"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f88c9817902800ee931cc42ef91df10df1e98fdb14848c07996463b4c711f80"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#7f3d4eb7796de2ab20d77a8b69697d1317ba6afc"
 dependencies = [
  "bitcoin",
  "rand",
@@ -2144,8 +2131,7 @@ dependencies = [
 [[package]]
 name = "lwk_jade"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "237fb37f329df999a3f503536da0de035332256c821bc341cf4644590a8057c8"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#7f3d4eb7796de2ab20d77a8b69697d1317ba6afc"
 dependencies = [
  "elements",
  "elements-miniscript",
@@ -2161,14 +2147,13 @@ dependencies = [
  "serde_json",
  "tempfile",
  "thiserror 1.0.69",
- "wasm-timer",
+ "web-time",
 ]
 
 [[package]]
 name = "lwk_signer"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14af12af3c1a94584f2f0b70828c634d48e091781a4ba70a26781e01e2db88f1"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#7f3d4eb7796de2ab20d77a8b69697d1317ba6afc"
 dependencies = [
  "base64 0.13.1",
  "bip39",
@@ -2181,7 +2166,7 @@ dependencies = [
 [[package]]
 name = "lwk_wollet"
 version = "0.8.0"
-source = "git+https://github.com/Blockstream/lwk?rev=5cfb36ada3d2b9de799eaabddf388827df4ab625#5cfb36ada3d2b9de799eaabddf388827df4ab625"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#7f3d4eb7796de2ab20d77a8b69697d1317ba6afc"
 dependencies = [
  "aes-gcm-siv",
  "age",
@@ -2306,7 +2291,7 @@ version = "6.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6205bd8bb1e454ad2e27422015fb5e4f2bcc7e08fa8f27058670d208324a4d2d"
 dependencies = [
- "bitflags 2.7.0",
+ "bitflags 2.8.0",
  "crossbeam-channel",
  "filetime",
  "fsevent-sys",
@@ -2389,37 +2374,12 @@ dependencies = [
 
 [[package]]
 name = "parking_lot"
-version = "0.11.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d17b78036a60663b797adeaee46f5c9dfebb86948d1255007a1d6be0271ff99"
-dependencies = [
- "instant",
- "lock_api",
- "parking_lot_core 0.8.6",
-]
-
-[[package]]
-name = "parking_lot"
 version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1bf18183cf54e8d6059647fc3063646a1801cf30896933ec2311622cc4b9a27"
 dependencies = [
  "lock_api",
- "parking_lot_core 0.9.10",
-]
-
-[[package]]
-name = "parking_lot_core"
-version = "0.8.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60a2cfe6f0ad2bfc16aefa463b497d5c7a5ecd44a23efa72aa342d90177356dc"
-dependencies = [
- "cfg-if",
- "instant",
- "libc",
- "redox_syscall 0.2.16",
- "smallvec",
- "winapi",
+ "parking_lot_core",
 ]
 
 [[package]]
@@ -2430,7 +2390,7 @@ checksum = "1e401f977ab385c9e4e3ab30627d6f26d00e2c73eef317493c4ec6d468726cf8"
 dependencies = [
  "cfg-if",
  "libc",
- "redox_syscall 0.5.8",
+ "redox_syscall",
  "smallvec",
  "windows-targets 0.52.6",
 ]
@@ -2666,20 +2626,11 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.2.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb5a58c1855b4b6819d59012155603f0b22ad30cad752600aadfcb695265519a"
-dependencies = [
- "bitflags 1.3.2",
-]
-
-[[package]]
-name = "redox_syscall"
 version = "0.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "03a862b389f93e68874fbf580b9de08dd02facb9a788ebadaf4a3fd33cf58834"
 dependencies = [
- "bitflags 2.7.0",
+ "bitflags 2.8.0",
 ]
 
 [[package]]
@@ -2842,11 +2793,11 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.43"
+version = "0.38.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a78891ee6bf2340288408954ac787aa063d8e8817e9f53abb37c695c6d834ef6"
+checksum = "fdb5bc1ae2baa591800df16c9ca78619bf65c0488b41b96ccec5d11220d8c154"
 dependencies = [
- "bitflags 2.7.0",
+ "bitflags 2.8.0",
  "errno",
  "libc",
  "linux-raw-sys",
@@ -3014,9 +2965,9 @@ checksum = "c2fdfc24bc566f839a2da4c4295b82db7d25a24253867d5c64355abb5799bdbe"
 
 [[package]]
 name = "semver"
-version = "1.0.24"
+version = "1.0.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3cb6eb87a131f756572d7fb904f6e7b68633f09cca868c5df1c4b8d1a694bbba"
+checksum = "f79dfe2d285b0488816f30e700a7438c5a73d816b5b7d3ac72fbc48b0d185e03"
 dependencies = [
  "serde",
 ]
@@ -3062,9 +3013,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.135"
+version = "1.0.137"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b0d7ba2887406110130a978386c4e1befb98c674b4fba677954e4db976630d9"
+checksum = "930cfb6e6abf99298aaad7d29abbef7a9999a9a8806a40088f55f0dcec03146b"
 dependencies = [
  "itoa",
  "memchr",
@@ -3137,7 +3088,7 @@ dependencies = [
  "futures",
  "lazy_static",
  "log",
- "parking_lot 0.12.3",
+ "parking_lot",
  "serial_test_derive",
 ]
 
@@ -3302,7 +3253,7 @@ version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c879d448e9d986b661742763247d3693ed13609438cf3d006f51f5368a5ba6b"
 dependencies = [
- "bitflags 2.7.0",
+ "bitflags 2.8.0",
  "core-foundation",
  "system-configuration-sys",
 ]
@@ -3508,7 +3459,7 @@ version = "0.22.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ae48d6208a266e853d946088ed816055e556cc6028c5e8e2b84d9fa5dd7c7f5"
 dependencies = [
- "indexmap 2.7.0",
+ "indexmap 2.7.1",
  "serde",
  "serde_spanned",
  "toml_datetime",
@@ -3773,21 +3724,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a05d73b933a847d6cccdda8f838a22ff101ad9bf93e33684f39c1f5f0eece3d"
 dependencies = [
  "unicode-ident",
-]
-
-[[package]]
-name = "wasm-timer"
-version = "0.2.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be0ecb0db480561e9a7642b5d3e4187c128914e58aa84330b9493e3eb68c5e7f"
-dependencies = [
- "futures",
- "js-sys",
- "parking_lot 0.11.2",
- "pin-utils",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
 ]
 
 [[package]]

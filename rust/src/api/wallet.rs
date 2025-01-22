@@ -69,8 +69,7 @@ impl Wallet {
         validate_domain: bool,
     ) -> anyhow::Result<(), LwkError> {
         let mut electrum_client: ElectrumClient =
-            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, validate_domain))?;
-        // info!("{:?}", electrum_client.capabilities());
+            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         let mut wallet = self.get_wallet()?;
         match full_scan_with_electrum_client(&mut wallet, &mut electrum_client) {
             Ok(_) => Ok(()),
@@ -103,7 +102,7 @@ impl Wallet {
         Ok(address.into())
     }
 
-    /// Get balances for a wallet. 
+    /// Get balances for a wallet.
     pub fn balances(&self) -> anyhow::Result<Balances, LwkError> {
         let balance_map: AssetIdBTreeMapUInt = (self.get_wallet()?.balance()?).into();
         let balance = Balances::from(balance_map);
@@ -154,6 +153,7 @@ impl Wallet {
         out_address: String,
         fee_rate: f32,
         asset: String,
+        fee_asset: Option<String>
     ) -> anyhow::Result<String, LwkError> {
         let wallet = self.get_wallet()?;
         let tx_builder = wallet.tx_builder();
@@ -169,6 +169,7 @@ impl Wallet {
         let pset = tx_builder
             .add_recipient(&address, sats, asset)?
             .fee_rate(Some(fee_rate))
+            .fee_asset(fee_asset)
             .finish()?;
         Ok(pset.to_string())
     }
@@ -202,7 +203,7 @@ impl Wallet {
         tx_bytes: Vec<u8>,
     ) -> anyhow::Result<String, LwkError> {
         let electrum_client: ElectrumClient =
-            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, true))?;
+            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         let tx = Transaction::deserialize(&tx_bytes)?;
         let txid: Txid = electrum_client.broadcast(&tx)?;
         Ok(txid.to_string())

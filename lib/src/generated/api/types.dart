@@ -107,6 +107,7 @@ class Tx with _$Tx {
     required List<TxOut> outputs,
     required List<TxOut> inputs,
     required BigInt fee,
+    required String feeAsset,
     int? height,
     required String unblindedUrl,
     required BigInt vsize,

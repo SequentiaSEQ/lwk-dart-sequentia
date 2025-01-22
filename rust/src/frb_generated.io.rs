@@ -173,6 +173,7 @@ impl CstDecode<crate::api::types::Tx> for wire_cst_tx {
             outputs: self.outputs.cst_decode(),
             inputs: self.inputs.cst_decode(),
             fee: self.fee.cst_decode(),
+            fee_asset: self.fee_asset.cst_decode(),
             height: self.height.cst_decode(),
             unblinded_url: self.unblinded_url.cst_decode(),
             vsize: self.vsize.cst_decode(),
@@ -306,6 +307,7 @@ impl NewWithNullPtr for wire_cst_tx {
             outputs: core::ptr::null_mut(),
             inputs: core::ptr::null_mut(),
             fee: Default::default(),
+            fee_asset: core::ptr::null_mut(),
             height: core::ptr::null_mut(),
             unblinded_url: core::ptr::null_mut(),
             vsize: Default::default(),
@@ -446,6 +448,7 @@ pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_build_asset_tx(
     out_address: *mut wire_cst_list_prim_u_8_strict,
     fee_rate: f32,
     asset: *mut wire_cst_list_prim_u_8_strict,
+    fee_asset: *mut wire_cst_list_prim_u_8_strict,
 ) {
     wire__crate__api__wallet__wallet_build_asset_tx_impl(
         port_,
@@ -454,6 +457,7 @@ pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_build_asset_tx(
         out_address,
         fee_rate,
         asset,
+        fee_asset,
     )
 }
 
@@ -727,6 +731,7 @@ pub struct wire_cst_tx {
     outputs: *mut wire_cst_list_tx_out,
     inputs: *mut wire_cst_list_tx_out,
     fee: u64,
+    fee_asset: *mut wire_cst_list_prim_u_8_strict,
     height: *mut u32,
     unblinded_url: *mut wire_cst_list_prim_u_8_strict,
     vsize: usize,
