@@ -481,6 +481,25 @@ pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx(
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc(
+    port_: i64,
+    that: *mut wire_cst_wallet,
+    receiver_pubkey: *mut wire_cst_list_prim_u_8_strict,
+    owner_pubkey: *mut wire_cst_list_prim_u_8_strict,
+    timeout: u32,
+    seed_hash: *mut wire_cst_list_prim_u_8_strict,
+) {
+    wire__crate__api__wallet__wallet_create_htlc_impl(
+        port_,
+        that,
+        receiver_pubkey,
+        owner_pubkey,
+        timeout,
+        seed_hash,
+    )
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_decode_tx(
     port_: i64,
     that: *mut wire_cst_wallet,

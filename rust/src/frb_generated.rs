@@ -38,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1909180031;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1340108171;
 
 // Section: executor
 
@@ -322,6 +322,41 @@ fn wire__crate__api__wallet__wallet_build_lbtc_tx_impl(
                         api_out_address,
                         api_fee_rate,
                         api_drain,
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__wallet__wallet_create_htlc_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<crate::api::wallet::Wallet>,
+    receiver_pubkey: impl CstDecode<String>,
+    owner_pubkey: impl CstDecode<String>,
+    timeout: impl CstDecode<u32>,
+    seed_hash: impl CstDecode<String>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "wallet_create_htlc",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            let api_receiver_pubkey = receiver_pubkey.cst_decode();
+            let api_owner_pubkey = owner_pubkey.cst_decode();
+            let api_timeout = timeout.cst_decode();
+            let api_seed_hash = seed_hash.cst_decode();
+            move |context| {
+                transform_result_dco::<_, _, crate::api::error::LwkError>((move || {
+                    let output_ok = crate::api::wallet::Wallet::create_htlc(
+                        &api_that,
+                        api_receiver_pubkey,
+                        api_owner_pubkey,
+                        api_timeout,
+                        api_seed_hash,
                     )?;
                     Ok(output_ok)
                 })())

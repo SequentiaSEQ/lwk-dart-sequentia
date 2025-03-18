@@ -620,6 +620,16 @@ class LwkCoreWire implements BaseWire {
       wasmModule.wire__crate__api__wallet__wallet_build_lbtc_tx(
           port_, that, sats, out_address, fee_rate, drain);
 
+  void wire__crate__api__wallet__wallet_create_htlc(
+          NativePortType port_,
+          JSAny that,
+          String receiver_pubkey,
+          String owner_pubkey,
+          int timeout,
+          String seed_hash) =>
+      wasmModule.wire__crate__api__wallet__wallet_create_htlc(
+          port_, that, receiver_pubkey, owner_pubkey, timeout, seed_hash);
+
   void wire__crate__api__wallet__wallet_decode_tx(
           NativePortType port_, JSAny that, String pset) =>
       wasmModule.wire__crate__api__wallet__wallet_decode_tx(port_, that, pset);
@@ -722,6 +732,14 @@ extension type LwkCoreWasmModule._(JSObject _) implements JSObject {
       String out_address,
       double fee_rate,
       bool drain);
+
+  external void wire__crate__api__wallet__wallet_create_htlc(
+      NativePortType port_,
+      JSAny that,
+      String receiver_pubkey,
+      String owner_pubkey,
+      int timeout,
+      String seed_hash);
 
   external void wire__crate__api__wallet__wallet_decode_tx(
       NativePortType port_, JSAny that, String pset);

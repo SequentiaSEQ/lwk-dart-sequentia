@@ -152,6 +152,13 @@ void frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx(int64_t port_,
                                                                float fee_rate,
                                                                bool drain);
 
+void frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc(int64_t port_,
+                                                             struct wire_cst_wallet *that,
+                                                             struct wire_cst_list_prim_u_8_strict *receiver_pubkey,
+                                                             struct wire_cst_list_prim_u_8_strict *owner_pubkey,
+                                                             uint32_t timeout,
+                                                             struct wire_cst_list_prim_u_8_strict *seed_hash);
+
 void frbgen_lwk_wire__crate__api__wallet__wallet_decode_tx(int64_t port_,
                                                            struct wire_cst_wallet *that,
                                                            struct wire_cst_list_prim_u_8_strict *pset);
@@ -230,6 +237,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_broadcast_tx);
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_build_asset_tx);
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx);
+    dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc);
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_decode_tx);
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_descriptor);
     dummy_var ^= ((int64_t) (void*) frbgen_lwk_wire__crate__api__wallet__wallet_init);

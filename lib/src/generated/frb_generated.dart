@@ -59,7 +59,7 @@ class LwkCore extends BaseEntrypoint<LwkCoreApi, LwkCoreApiImpl, LwkCoreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 1909180031;
+  int get rustContentHash => 1340108171;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -109,6 +109,13 @@ abstract class LwkCoreApi extends BaseApi {
       required String outAddress,
       required double feeRate,
       required bool drain});
+
+  Future<String> crateApiWalletWalletCreateHtlc(
+      {required Wallet that,
+      required String receiverPubkey,
+      required String ownerPubkey,
+      required int timeout,
+      required String seedHash});
 
   Future<PsetAmounts> crateApiWalletWalletDecodeTx(
       {required Wallet that, required String pset});
@@ -457,6 +464,45 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
       const TaskConstMeta(
         debugName: "wallet_build_lbtc_tx",
         argNames: ["that", "sats", "outAddress", "feeRate", "drain"],
+      );
+
+  @override
+  Future<String> crateApiWalletWalletCreateHtlc(
+      {required Wallet that,
+      required String receiverPubkey,
+      required String ownerPubkey,
+      required int timeout,
+      required String seedHash}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_wallet(that);
+        var arg1 = cst_encode_String(receiverPubkey);
+        var arg2 = cst_encode_String(ownerPubkey);
+        var arg3 = cst_encode_u_32(timeout);
+        var arg4 = cst_encode_String(seedHash);
+        return wire.wire__crate__api__wallet__wallet_create_htlc(
+            port_, arg0, arg1, arg2, arg3, arg4);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_lwk_error,
+      ),
+      constMeta: kCrateApiWalletWalletCreateHtlcConstMeta,
+      argValues: [that, receiverPubkey, ownerPubkey, timeout, seedHash],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiWalletWalletCreateHtlcConstMeta =>
+      const TaskConstMeta(
+        debugName: "wallet_create_htlc",
+        argNames: [
+          "that",
+          "receiverPubkey",
+          "ownerPubkey",
+          "timeout",
+          "seedHash"
+        ],
       );
 
   @override

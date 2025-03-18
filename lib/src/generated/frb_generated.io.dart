@@ -877,6 +877,44 @@ class LwkCoreWire implements BaseWire {
           void Function(int, ffi.Pointer<wire_cst_wallet>, int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>, double, bool)>();
 
+  void wire__crate__api__wallet__wallet_create_htlc(
+    int port_,
+    ffi.Pointer<wire_cst_wallet> that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> receiver_pubkey,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> owner_pubkey,
+    int timeout,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> seed_hash,
+  ) {
+    return _wire__crate__api__wallet__wallet_create_htlc(
+      port_,
+      that,
+      receiver_pubkey,
+      owner_pubkey,
+      timeout,
+      seed_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__wallet_create_htlcPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.Pointer<wire_cst_wallet>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Uint32,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc');
+  late final _wire__crate__api__wallet__wallet_create_htlc =
+      _wire__crate__api__wallet__wallet_create_htlcPtr.asFunction<
+          void Function(
+              int,
+              ffi.Pointer<wire_cst_wallet>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
   void wire__crate__api__wallet__wallet_decode_tx(
     int port_,
     ffi.Pointer<wire_cst_wallet> that,

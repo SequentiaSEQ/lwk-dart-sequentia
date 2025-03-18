@@ -501,6 +501,25 @@ pub fn wire__crate__api__wallet__wallet_build_lbtc_tx(
 }
 
 #[wasm_bindgen]
+pub fn wire__crate__api__wallet__wallet_create_htlc(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    receiver_pubkey: String,
+    owner_pubkey: String,
+    timeout: u32,
+    seed_hash: String,
+) {
+    wire__crate__api__wallet__wallet_create_htlc_impl(
+        port_,
+        that,
+        receiver_pubkey,
+        owner_pubkey,
+        timeout,
+        seed_hash,
+    )
+}
+
+#[wasm_bindgen]
 pub fn wire__crate__api__wallet__wallet_decode_tx(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,

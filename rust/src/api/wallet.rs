@@ -1,6 +1,6 @@
 use lwk_common::Signer;
 use lwk_signer::SwSigner;
-use lwk_wollet::full_scan_with_electrum_client;
+use lwk_wollet::{elements::hex::FromHex, full_scan_with_electrum_client};
 // use lwk_wollet::elements_miniscript::descriptor;
 use crate::frb_generated::RustOpaque;
 // use log::{info, warn};
@@ -207,6 +207,23 @@ impl Wallet {
         let tx = Transaction::deserialize(&tx_bytes)?;
         let txid: Txid = electrum_client.broadcast(&tx)?;
         Ok(txid.to_string())
+    }
+
+    pub fn create_htlc(
+        &self,
+        receiver_pubkey: String,
+        owner_pubkey: String,
+        timeout: u32,
+        seed_hash: String
+    ) -> anyhow::Result<String, LwkError> {
+        let wallet = self.get_wallet()?;
+        let htlc = wallet.create_htlc(
+            lwk_wollet::bitcoin::PublicKey::from_str(&receiver_pubkey).unwrap(),
+            lwk_wollet::bitcoin::PublicKey::from_str(&owner_pubkey).unwrap(),
+            timeout,
+            Some(Vec::<u8>::from_hex(&seed_hash).unwrap())
+        )?;
+        Ok(htlc.to_string())
     }
 
     /// Get utxos of the wallet

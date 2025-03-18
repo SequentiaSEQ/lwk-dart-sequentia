@@ -78,6 +78,18 @@ class Wallet {
           feeRate: feeRate,
           drain: drain);
 
+  Future<String> createHtlc(
+          {required String receiverPubkey,
+          required String ownerPubkey,
+          required int timeout,
+          required String seedHash}) =>
+      LwkCore.instance.api.crateApiWalletWalletCreateHtlc(
+          that: this,
+          receiverPubkey: receiverPubkey,
+          ownerPubkey: ownerPubkey,
+          timeout: timeout,
+          seedHash: seedHash);
+
   /// Decode a transaction given a PSET
   Future<PsetAmounts> decodeTx({required String pset}) =>
       LwkCore.instance.api.crateApiWalletWalletDecodeTx(that: this, pset: pset);
