@@ -53,7 +53,7 @@ pub struct Balance {
     pub value: i64,
 }
 
-/// Balances is a list of Balance objects 
+/// Balances is a list of Balance objects
 /// A multi asset wallet will have more than one item in the list for each asset
 #[frb(dart_metadata=("freezed"))]
 pub type Balances = Vec<Balance>;
@@ -154,7 +154,7 @@ impl Address {
             Ok(Network::Testnet)
         }
     }
-    
+
     /// Create an address from a scriptpubkey. Always returns 0 as the index is only for wallet generated addresses
     pub fn address_from_script(
         network: Network,
@@ -326,3 +326,24 @@ impl Blockchain {
         Ok(())
     }
 }
+
+#[derive(Clone, Debug, PartialEq)]
+#[frb(dart_metadata=("freezed"))]
+pub struct HTLC {
+    pub address: String,
+    pub redeem_script: String,
+    pub seed_hash: String,
+    pub seed: String,
+}
+
+impl From<lwk_wollet::HTLC> for HTLC {
+    fn from(htlc: lwk_wollet::HTLC) -> Self {
+        HTLC {
+            address: htlc.address,
+            redeem_script: htlc.redeem_script.to_hex(),
+            seed_hash: htlc.seed_hash.to_hex(),
+            seed: htlc.seed.unwrap_or_default().to_hex(),
+        }
+    }
+}
+

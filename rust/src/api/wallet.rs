@@ -20,7 +20,7 @@ use std::str::FromStr;
 pub use std::sync::Mutex;
 use std::sync::MutexGuard;
 
-use super::descriptor::Descriptor;
+use super::{descriptor::Descriptor, types::HTLC};
 use super::error::LwkError;
 use super::types::Address;
 use super::types::AssetIdBTreeMapUInt;
@@ -215,7 +215,7 @@ impl Wallet {
         owner_pubkey: String,
         timeout: u32,
         seed_hash: String
-    ) -> anyhow::Result<String, LwkError> {
+    ) -> anyhow::Result<HTLC, LwkError> {
         let wallet = self.get_wallet()?;
         let htlc = wallet.create_htlc(
             lwk_wollet::bitcoin::PublicKey::from_str(&receiver_pubkey).unwrap(),
@@ -223,7 +223,7 @@ impl Wallet {
             timeout,
             Some(Vec::<u8>::from_hex(&seed_hash).unwrap())
         )?;
-        Ok(htlc.to_string())
+        Ok(htlc.into())
     }
 
     /// Get utxos of the wallet
@@ -327,6 +327,25 @@ mod tests {
         let tx_bytes = hex::decode(signed).unwrap();
         let txid = Wallet::broadcast_tx(electrum_url, tx_bytes).unwrap();
         println!("TXID: {}", txid);
+    }
+
+    #[test]
+    fn test_create_htlc() {
+        let mnemonic = "umbrella response wide outer mystery drastic crew festival poet coconut error act";
+        let network = Network::Testnet;
+        let desc = Descriptor::new_confidential(network, mnemonic.to_string()).unwrap();
+        let wallet = Wallet::init(network, "/tmp/lwk".to_string(), desc).unwrap();
+
+        let receiver_pubkey = "028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d";
+        let owner_pubkey = "02e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf";
+        let seed_hash = "ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e";
+        let htlc =  wallet.create_htlc(receiver_pubkey.to_string(), owner_pubkey.to_string(), 10, seed_hash.to_string());
+
+        let result = htlc.unwrap();
+
+        assert_eq!(result.address, "2M4CKbjEmJDdGgrM7TkBRubVPxN9efb495W");
+        assert_eq!(result.redeem_script, "63a820ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e8821028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d675ab2752102e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf68ac");
+        assert_eq!(result.seed_hash, "ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e");
     }
 
     // #[test]

@@ -95,6 +95,13 @@ typedef struct wire_cst_address {
   uint32_t index;
 } wire_cst_address;
 
+typedef struct wire_cst_htlc {
+  struct wire_cst_list_prim_u_8_strict *address;
+  struct wire_cst_list_prim_u_8_strict *redeem_script;
+  struct wire_cst_list_prim_u_8_strict *seed_hash;
+  struct wire_cst_list_prim_u_8_strict *seed;
+} wire_cst_htlc;
+
 typedef struct wire_cst_lwk_error {
   struct wire_cst_list_prim_u_8_strict *msg;
 } wire_cst_lwk_error;

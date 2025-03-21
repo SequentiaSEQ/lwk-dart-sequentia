@@ -88,6 +88,17 @@ impl CstDecode<crate::api::descriptor::Descriptor> for wire_cst_descriptor {
         }
     }
 }
+impl CstDecode<crate::api::types::HTLC> for wire_cst_htlc {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::types::HTLC {
+        crate::api::types::HTLC {
+            address: self.address.cst_decode(),
+            redeem_script: self.redeem_script.cst_decode(),
+            seed_hash: self.seed_hash.cst_decode(),
+            seed: self.seed.cst_decode(),
+        }
+    }
+}
 impl CstDecode<Vec<crate::api::types::Balance>> for *mut wire_cst_list_balance {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> Vec<crate::api::types::Balance> {
@@ -255,6 +266,21 @@ impl NewWithNullPtr for wire_cst_descriptor {
     }
 }
 impl Default for wire_cst_descriptor {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_htlc {
+    fn new_with_null_ptr() -> Self {
+        Self {
+            address: core::ptr::null_mut(),
+            redeem_script: core::ptr::null_mut(),
+            seed_hash: core::ptr::null_mut(),
+            seed: core::ptr::null_mut(),
+        }
+    }
+}
+impl Default for wire_cst_htlc {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -692,6 +718,14 @@ pub struct wire_cst_blockchain {}
 #[derive(Clone, Copy)]
 pub struct wire_cst_descriptor {
     ct_descriptor: *mut wire_cst_list_prim_u_8_strict,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_htlc {
+    address: *mut wire_cst_list_prim_u_8_strict,
+    redeem_script: *mut wire_cst_list_prim_u_8_strict,
+    seed_hash: *mut wire_cst_list_prim_u_8_strict,
+    seed: *mut wire_cst_list_prim_u_8_strict,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]

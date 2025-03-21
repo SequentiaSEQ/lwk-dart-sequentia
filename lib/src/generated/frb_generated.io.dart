@@ -62,6 +62,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   double dco_decode_f_32(dynamic raw);
 
   @protected
+  HTLC dco_decode_htlc(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
@@ -163,6 +166,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   double sse_decode_f_32(SseDeserializer deserializer);
+
+  @protected
+  HTLC sse_decode_htlc(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -384,6 +390,14 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_htlc(HTLC apiObj, wire_cst_htlc wireObj) {
+    wireObj.address = cst_encode_String(apiObj.address);
+    wireObj.redeem_script = cst_encode_String(apiObj.redeemScript);
+    wireObj.seed_hash = cst_encode_String(apiObj.seedHash);
+    wireObj.seed = cst_encode_String(apiObj.seed);
+  }
+
+  @protected
   void cst_api_fill_to_wire_lwk_error(
       LwkError apiObj, wire_cst_lwk_error wireObj) {
     wireObj.msg = cst_encode_String(apiObj.msg);
@@ -502,6 +516,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   void sse_encode_f_32(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_htlc(HTLC self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -1399,6 +1416,16 @@ final class wire_cst_address extends ffi.Struct {
 
   @ffi.Uint32()
   external int index;
+}
+
+final class wire_cst_htlc extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> address;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> redeem_script;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> seed_hash;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> seed;
 }
 
 final class wire_cst_lwk_error extends ffi.Struct {

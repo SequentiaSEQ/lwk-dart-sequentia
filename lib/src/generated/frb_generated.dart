@@ -110,7 +110,7 @@ abstract class LwkCoreApi extends BaseApi {
       required double feeRate,
       required bool drain});
 
-  Future<String> crateApiWalletWalletCreateHtlc(
+  Future<HTLC> crateApiWalletWalletCreateHtlc(
       {required Wallet that,
       required String receiverPubkey,
       required String ownerPubkey,
@@ -467,7 +467,7 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
       );
 
   @override
-  Future<String> crateApiWalletWalletCreateHtlc(
+  Future<HTLC> crateApiWalletWalletCreateHtlc(
       {required Wallet that,
       required String receiverPubkey,
       required String ownerPubkey,
@@ -484,7 +484,7 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
             port_, arg0, arg1, arg2, arg3, arg4);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
+        decodeSuccessData: dco_decode_htlc,
         decodeErrorData: dco_decode_lwk_error,
       ),
       constMeta: kCrateApiWalletWalletCreateHtlcConstMeta,
@@ -818,6 +818,20 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   }
 
   @protected
+  HTLC dco_decode_htlc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return HTLC(
+      address: dco_decode_String(arr[0]),
+      redeemScript: dco_decode_String(arr[1]),
+      seedHash: dco_decode_String(arr[2]),
+      seed: dco_decode_String(arr[3]),
+    );
+  }
+
+  @protected
   int dco_decode_i_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -1084,6 +1098,20 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   double sse_decode_f_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat32();
+  }
+
+  @protected
+  HTLC sse_decode_htlc(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_address = sse_decode_String(deserializer);
+    var var_redeemScript = sse_decode_String(deserializer);
+    var var_seedHash = sse_decode_String(deserializer);
+    var var_seed = sse_decode_String(deserializer);
+    return HTLC(
+        address: var_address,
+        redeemScript: var_redeemScript,
+        seedHash: var_seedHash,
+        seed: var_seed);
   }
 
   @protected
@@ -1417,6 +1445,15 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   void sse_encode_f_32(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat32(self);
+  }
+
+  @protected
+  void sse_encode_htlc(HTLC self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.address, serializer);
+    sse_encode_String(self.redeemScript, serializer);
+    sse_encode_String(self.seedHash, serializer);
+    sse_encode_String(self.seed, serializer);
   }
 
   @protected

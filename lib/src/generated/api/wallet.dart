@@ -78,7 +78,7 @@ class Wallet {
           feeRate: feeRate,
           drain: drain);
 
-  Future<String> createHtlc(
+  Future<HTLC> createHtlc(
           {required String receiverPubkey,
           required String ownerPubkey,
           required int timeout,

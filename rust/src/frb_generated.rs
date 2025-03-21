@@ -703,6 +703,22 @@ impl SseDecode for f32 {
     }
 }
 
+impl SseDecode for crate::api::types::HTLC {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_address = <String>::sse_decode(deserializer);
+        let mut var_redeemScript = <String>::sse_decode(deserializer);
+        let mut var_seedHash = <String>::sse_decode(deserializer);
+        let mut var_seed = <String>::sse_decode(deserializer);
+        return crate::api::types::HTLC {
+            address: var_address,
+            redeem_script: var_redeemScript,
+            seed_hash: var_seedHash,
+            seed: var_seed,
+        };
+    }
+}
+
 impl SseDecode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1026,6 +1042,24 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::descriptor::Descriptor>
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::types::HTLC {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.address.into_into_dart().into_dart(),
+            self.redeem_script.into_into_dart().into_dart(),
+            self.seed_hash.into_into_dart().into_dart(),
+            self.seed.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::types::HTLC {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::types::HTLC> for crate::api::types::HTLC {
+    fn into_into_dart(self) -> crate::api::types::HTLC {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::api::error::LwkError {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [self.msg.into_into_dart().into_dart()].into_dart()
@@ -1229,6 +1263,16 @@ impl SseEncode for f32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         serializer.cursor.write_f32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::types::HTLC {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.address, serializer);
+        <String>::sse_encode(self.redeem_script, serializer);
+        <String>::sse_encode(self.seed_hash, serializer);
+        <String>::sse_encode(self.seed, serializer);
     }
 }
 

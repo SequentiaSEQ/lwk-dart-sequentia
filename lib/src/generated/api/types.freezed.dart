@@ -323,6 +323,191 @@ abstract class _Balance implements Balance {
 }
 
 /// @nodoc
+mixin _$HTLC {
+  String get address => throw _privateConstructorUsedError;
+  String get redeemScript => throw _privateConstructorUsedError;
+  String get seedHash => throw _privateConstructorUsedError;
+  String get seed => throw _privateConstructorUsedError;
+
+  /// Create a copy of HTLC
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $HTLCCopyWith<HTLC> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HTLCCopyWith<$Res> {
+  factory $HTLCCopyWith(HTLC value, $Res Function(HTLC) then) =
+      _$HTLCCopyWithImpl<$Res, HTLC>;
+  @useResult
+  $Res call(
+      {String address, String redeemScript, String seedHash, String seed});
+}
+
+/// @nodoc
+class _$HTLCCopyWithImpl<$Res, $Val extends HTLC>
+    implements $HTLCCopyWith<$Res> {
+  _$HTLCCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of HTLC
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? address = null,
+    Object? redeemScript = null,
+    Object? seedHash = null,
+    Object? seed = null,
+  }) {
+    return _then(_value.copyWith(
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      redeemScript: null == redeemScript
+          ? _value.redeemScript
+          : redeemScript // ignore: cast_nullable_to_non_nullable
+              as String,
+      seedHash: null == seedHash
+          ? _value.seedHash
+          : seedHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      seed: null == seed
+          ? _value.seed
+          : seed // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$HTLCImplCopyWith<$Res> implements $HTLCCopyWith<$Res> {
+  factory _$$HTLCImplCopyWith(
+          _$HTLCImpl value, $Res Function(_$HTLCImpl) then) =
+      __$$HTLCImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String address, String redeemScript, String seedHash, String seed});
+}
+
+/// @nodoc
+class __$$HTLCImplCopyWithImpl<$Res>
+    extends _$HTLCCopyWithImpl<$Res, _$HTLCImpl>
+    implements _$$HTLCImplCopyWith<$Res> {
+  __$$HTLCImplCopyWithImpl(_$HTLCImpl _value, $Res Function(_$HTLCImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HTLC
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? address = null,
+    Object? redeemScript = null,
+    Object? seedHash = null,
+    Object? seed = null,
+  }) {
+    return _then(_$HTLCImpl(
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      redeemScript: null == redeemScript
+          ? _value.redeemScript
+          : redeemScript // ignore: cast_nullable_to_non_nullable
+              as String,
+      seedHash: null == seedHash
+          ? _value.seedHash
+          : seedHash // ignore: cast_nullable_to_non_nullable
+              as String,
+      seed: null == seed
+          ? _value.seed
+          : seed // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$HTLCImpl implements _HTLC {
+  const _$HTLCImpl(
+      {required this.address,
+      required this.redeemScript,
+      required this.seedHash,
+      required this.seed});
+
+  @override
+  final String address;
+  @override
+  final String redeemScript;
+  @override
+  final String seedHash;
+  @override
+  final String seed;
+
+  @override
+  String toString() {
+    return 'HTLC(address: $address, redeemScript: $redeemScript, seedHash: $seedHash, seed: $seed)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HTLCImpl &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.redeemScript, redeemScript) ||
+                other.redeemScript == redeemScript) &&
+            (identical(other.seedHash, seedHash) ||
+                other.seedHash == seedHash) &&
+            (identical(other.seed, seed) || other.seed == seed));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, address, redeemScript, seedHash, seed);
+
+  /// Create a copy of HTLC
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HTLCImplCopyWith<_$HTLCImpl> get copyWith =>
+      __$$HTLCImplCopyWithImpl<_$HTLCImpl>(this, _$identity);
+}
+
+abstract class _HTLC implements HTLC {
+  const factory _HTLC(
+      {required final String address,
+      required final String redeemScript,
+      required final String seedHash,
+      required final String seed}) = _$HTLCImpl;
+
+  @override
+  String get address;
+  @override
+  String get redeemScript;
+  @override
+  String get seedHash;
+  @override
+  String get seed;
+
+  /// Create a copy of HTLC
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$HTLCImplCopyWith<_$HTLCImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OutPoint {
   String get txid => throw _privateConstructorUsedError;
   int get vout => throw _privateConstructorUsedError;

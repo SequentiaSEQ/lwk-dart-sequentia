@@ -100,6 +100,28 @@ impl CstDecode<crate::api::descriptor::Descriptor>
         }
     }
 }
+impl CstDecode<crate::api::types::HTLC>
+    for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::types::HTLC {
+        let self_ = self
+            .dyn_into::<flutter_rust_bridge::for_generated::js_sys::Array>()
+            .unwrap();
+        assert_eq!(
+            self_.length(),
+            4,
+            "Expected 4 elements, got {}",
+            self_.length()
+        );
+        crate::api::types::HTLC {
+            address: self_.get(0).cst_decode(),
+            redeem_script: self_.get(1).cst_decode(),
+            seed_hash: self_.get(2).cst_decode(),
+            seed: self_.get(3).cst_decode(),
+        }
+    }
+}
 impl CstDecode<Vec<crate::api::types::Balance>>
     for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
 {
