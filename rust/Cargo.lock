@@ -2120,7 +2120,7 @@ dependencies = [
 [[package]]
 name = "lwk_common"
 version = "0.8.0"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#b1201087a0c3d8a39bf39433c6940c1fa34e376c"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest"
 dependencies = [
  "base64 0.21.7",
  "elements",
@@ -2134,7 +2134,7 @@ dependencies = [
 [[package]]
 name = "lwk_containers"
 version = "0.8.0"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#b1201087a0c3d8a39bf39433c6940c1fa34e376c"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest"
 dependencies = [
  "bitcoin",
  "rand 0.8.5",
@@ -2145,7 +2145,7 @@ dependencies = [
 [[package]]
 name = "lwk_jade"
 version = "0.8.0"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#b1201087a0c3d8a39bf39433c6940c1fa34e376c"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest"
 dependencies = [
  "elements",
  "elements-miniscript",
@@ -2167,7 +2167,7 @@ dependencies = [
 [[package]]
 name = "lwk_signer"
 version = "0.8.0"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#b1201087a0c3d8a39bf39433c6940c1fa34e376c"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest"
 dependencies = [
  "base64 0.13.1",
  "bip39",
@@ -2180,7 +2180,7 @@ dependencies = [
 [[package]]
 name = "lwk_wollet"
 version = "0.8.0"
-source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest#b1201087a0c3d8a39bf39433c6940c1fa34e376c"
+source = "git+https://github.com/SequentiaSEQ/lwk-sequentia?branch=test_latest"
 dependencies = [
  "aes-gcm-siv",
  "age",

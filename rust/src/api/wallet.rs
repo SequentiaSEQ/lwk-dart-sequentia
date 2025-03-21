@@ -349,6 +349,20 @@ mod tests {
         assert_eq!(htlc.seed, None)
     }
 
+    #[test]
+    fn test_create_htlc_without_seedhash() {
+        let mnemonic = "umbrella response wide outer mystery drastic crew festival poet coconut error act";
+        let network = Network::Testnet;
+        let desc = Descriptor::new_confidential(network, mnemonic.to_string()).unwrap();
+        let wallet = Wallet::init(network, "/tmp/lwk".to_string(), desc).unwrap();
+
+        let receiver_pubkey = Vec::from_hex("028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d").unwrap();
+        let owner_pubkey =  Vec::from_hex("02e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf").unwrap();
+        let htlc =  wallet.create_htlc(receiver_pubkey, owner_pubkey, 10, None).unwrap();
+
+        assert!(htlc.seed.is_some())
+    }
+
     // #[test]
     // fn test_external_utxo() {
     //     // Send tx with external utxos
