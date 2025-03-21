@@ -189,6 +189,12 @@ impl CstDecode<Option<String>> for Option<String> {
         self.map(CstDecode::cst_decode)
     }
 }
+impl CstDecode<Option<Vec<u8>>> for Option<Box<[u8]>> {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> Option<Vec<u8>> {
+        self.map(CstDecode::cst_decode)
+    }
+}
 impl CstDecode<crate::api::types::OutPoint>
     for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
 {
@@ -526,10 +532,10 @@ pub fn wire__crate__api__wallet__wallet_build_lbtc_tx(
 pub fn wire__crate__api__wallet__wallet_create_htlc(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    receiver_pubkey: String,
-    owner_pubkey: String,
+    receiver_pubkey: Box<[u8]>,
+    owner_pubkey: Box<[u8]>,
     timeout: u32,
-    seed_hash: String,
+    seed_hash: Option<Box<[u8]>>,
 ) {
     wire__crate__api__wallet__wallet_create_htlc_impl(
         port_,

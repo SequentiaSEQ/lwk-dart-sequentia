@@ -98,6 +98,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
+
+  @protected
   OutPoint dco_decode_out_point(dynamic raw);
 
   @protected
@@ -202,6 +205,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
+
+  @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
   OutPoint sse_decode_out_point(SseDeserializer deserializer);
@@ -343,6 +349,13 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   }
 
   @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict>
+      cst_encode_opt_list_prim_u_8_strict(Uint8List? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_list_prim_u_8_strict(raw);
+  }
+
+  @protected
   int cst_encode_u_64(BigInt raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw.toSigned(64).toInt();
@@ -392,9 +405,10 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   @protected
   void cst_api_fill_to_wire_htlc(HTLC apiObj, wire_cst_htlc wireObj) {
     wireObj.address = cst_encode_String(apiObj.address);
-    wireObj.redeem_script = cst_encode_String(apiObj.redeemScript);
-    wireObj.seed_hash = cst_encode_String(apiObj.seedHash);
-    wireObj.seed = cst_encode_String(apiObj.seed);
+    wireObj.redeem_script =
+        cst_encode_list_prim_u_8_strict(apiObj.redeemScript);
+    wireObj.seed_hash = cst_encode_list_prim_u_8_strict(apiObj.seedHash);
+    wireObj.seed = cst_encode_opt_list_prim_u_8_strict(apiObj.seed);
   }
 
   @protected
@@ -553,6 +567,10 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
 
   @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+      Uint8List? self, SseSerializer serializer);
 
   @protected
   void sse_encode_out_point(OutPoint self, SseSerializer serializer);
@@ -897,8 +915,8 @@ class LwkCoreWire implements BaseWire {
   void wire__crate__api__wallet__wallet_create_htlc(
     int port_,
     ffi.Pointer<wire_cst_wallet> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> receiver_pubkey,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> owner_pubkey,
+    ffi.Pointer<wire_cst_list_prim_u_8_loose> receiver_pubkey,
+    ffi.Pointer<wire_cst_list_prim_u_8_loose> owner_pubkey,
     int timeout,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> seed_hash,
   ) {
@@ -917,8 +935,8 @@ class LwkCoreWire implements BaseWire {
               ffi.Void Function(
                   ffi.Int64,
                   ffi.Pointer<wire_cst_wallet>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
                   ffi.Uint32,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc');
@@ -927,8 +945,8 @@ class LwkCoreWire implements BaseWire {
           void Function(
               int,
               ffi.Pointer<wire_cst_wallet>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+              ffi.Pointer<wire_cst_list_prim_u_8_loose>,
               int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 

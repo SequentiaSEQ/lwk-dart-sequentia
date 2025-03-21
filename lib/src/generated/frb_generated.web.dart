@@ -100,6 +100,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
+
+  @protected
   OutPoint dco_decode_out_point(dynamic raw);
 
   @protected
@@ -206,6 +209,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
   OutPoint sse_decode_out_point(SseDeserializer deserializer);
 
   @protected
@@ -302,9 +308,9 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [
       cst_encode_String(raw.address),
-      cst_encode_String(raw.redeemScript),
-      cst_encode_String(raw.seedHash),
-      cst_encode_String(raw.seed)
+      cst_encode_list_prim_u_8_strict(raw.redeemScript),
+      cst_encode_list_prim_u_8_strict(raw.seedHash),
+      cst_encode_opt_list_prim_u_8_strict(raw.seed)
     ].jsify()!;
   }
 
@@ -360,6 +366,12 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   int? cst_encode_opt_box_autoadd_u_32(int? raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw == null ? null : cst_encode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  JSAny? cst_encode_opt_list_prim_u_8_strict(Uint8List? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? null : cst_encode_list_prim_u_8_strict(raw);
   }
 
   @protected
@@ -536,6 +548,10 @@ abstract class LwkCoreApiImplPlatform extends BaseApiImpl<LwkCoreWire> {
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+      Uint8List? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_out_point(OutPoint self, SseSerializer serializer);
 
   @protected
@@ -643,10 +659,10 @@ class LwkCoreWire implements BaseWire {
   void wire__crate__api__wallet__wallet_create_htlc(
           NativePortType port_,
           JSAny that,
-          String receiver_pubkey,
-          String owner_pubkey,
+          JSAny receiver_pubkey,
+          JSAny owner_pubkey,
           int timeout,
-          String seed_hash) =>
+          JSAny? seed_hash) =>
       wasmModule.wire__crate__api__wallet__wallet_create_htlc(
           port_, that, receiver_pubkey, owner_pubkey, timeout, seed_hash);
 
@@ -756,10 +772,10 @@ extension type LwkCoreWasmModule._(JSObject _) implements JSObject {
   external void wire__crate__api__wallet__wallet_create_htlc(
       NativePortType port_,
       JSAny that,
-      String receiver_pubkey,
-      String owner_pubkey,
+      JSAny receiver_pubkey,
+      JSAny owner_pubkey,
       int timeout,
-      String seed_hash);
+      JSAny? seed_hash);
 
   external void wire__crate__api__wallet__wallet_decode_tx(
       NativePortType port_, JSAny that, String pset);

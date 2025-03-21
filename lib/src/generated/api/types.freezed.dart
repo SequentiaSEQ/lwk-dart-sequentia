@@ -325,9 +325,9 @@ abstract class _Balance implements Balance {
 /// @nodoc
 mixin _$HTLC {
   String get address => throw _privateConstructorUsedError;
-  String get redeemScript => throw _privateConstructorUsedError;
-  String get seedHash => throw _privateConstructorUsedError;
-  String get seed => throw _privateConstructorUsedError;
+  Uint8List get redeemScript => throw _privateConstructorUsedError;
+  Uint8List get seedHash => throw _privateConstructorUsedError;
+  Uint8List? get seed => throw _privateConstructorUsedError;
 
   /// Create a copy of HTLC
   /// with the given fields replaced by the non-null parameter values.
@@ -341,7 +341,10 @@ abstract class $HTLCCopyWith<$Res> {
       _$HTLCCopyWithImpl<$Res, HTLC>;
   @useResult
   $Res call(
-      {String address, String redeemScript, String seedHash, String seed});
+      {String address,
+      Uint8List redeemScript,
+      Uint8List seedHash,
+      Uint8List? seed});
 }
 
 /// @nodoc
@@ -362,7 +365,7 @@ class _$HTLCCopyWithImpl<$Res, $Val extends HTLC>
     Object? address = null,
     Object? redeemScript = null,
     Object? seedHash = null,
-    Object? seed = null,
+    Object? seed = freezed,
   }) {
     return _then(_value.copyWith(
       address: null == address
@@ -372,15 +375,15 @@ class _$HTLCCopyWithImpl<$Res, $Val extends HTLC>
       redeemScript: null == redeemScript
           ? _value.redeemScript
           : redeemScript // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uint8List,
       seedHash: null == seedHash
           ? _value.seedHash
           : seedHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      seed: null == seed
+              as Uint8List,
+      seed: freezed == seed
           ? _value.seed
           : seed // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uint8List?,
     ) as $Val);
   }
 }
@@ -393,7 +396,10 @@ abstract class _$$HTLCImplCopyWith<$Res> implements $HTLCCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String address, String redeemScript, String seedHash, String seed});
+      {String address,
+      Uint8List redeemScript,
+      Uint8List seedHash,
+      Uint8List? seed});
 }
 
 /// @nodoc
@@ -411,7 +417,7 @@ class __$$HTLCImplCopyWithImpl<$Res>
     Object? address = null,
     Object? redeemScript = null,
     Object? seedHash = null,
-    Object? seed = null,
+    Object? seed = freezed,
   }) {
     return _then(_$HTLCImpl(
       address: null == address
@@ -421,15 +427,15 @@ class __$$HTLCImplCopyWithImpl<$Res>
       redeemScript: null == redeemScript
           ? _value.redeemScript
           : redeemScript // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uint8List,
       seedHash: null == seedHash
           ? _value.seedHash
           : seedHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      seed: null == seed
+              as Uint8List,
+      seed: freezed == seed
           ? _value.seed
           : seed // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uint8List?,
     ));
   }
 }
@@ -441,16 +447,16 @@ class _$HTLCImpl implements _HTLC {
       {required this.address,
       required this.redeemScript,
       required this.seedHash,
-      required this.seed});
+      this.seed});
 
   @override
   final String address;
   @override
-  final String redeemScript;
+  final Uint8List redeemScript;
   @override
-  final String seedHash;
+  final Uint8List seedHash;
   @override
-  final String seed;
+  final Uint8List? seed;
 
   @override
   String toString() {
@@ -463,16 +469,19 @@ class _$HTLCImpl implements _HTLC {
         (other.runtimeType == runtimeType &&
             other is _$HTLCImpl &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.redeemScript, redeemScript) ||
-                other.redeemScript == redeemScript) &&
-            (identical(other.seedHash, seedHash) ||
-                other.seedHash == seedHash) &&
-            (identical(other.seed, seed) || other.seed == seed));
+            const DeepCollectionEquality()
+                .equals(other.redeemScript, redeemScript) &&
+            const DeepCollectionEquality().equals(other.seedHash, seedHash) &&
+            const DeepCollectionEquality().equals(other.seed, seed));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, address, redeemScript, seedHash, seed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      address,
+      const DeepCollectionEquality().hash(redeemScript),
+      const DeepCollectionEquality().hash(seedHash),
+      const DeepCollectionEquality().hash(seed));
 
   /// Create a copy of HTLC
   /// with the given fields replaced by the non-null parameter values.
@@ -486,18 +495,18 @@ class _$HTLCImpl implements _HTLC {
 abstract class _HTLC implements HTLC {
   const factory _HTLC(
       {required final String address,
-      required final String redeemScript,
-      required final String seedHash,
-      required final String seed}) = _$HTLCImpl;
+      required final Uint8List redeemScript,
+      required final Uint8List seedHash,
+      final Uint8List? seed}) = _$HTLCImpl;
 
   @override
   String get address;
   @override
-  String get redeemScript;
+  Uint8List get redeemScript;
   @override
-  String get seedHash;
+  Uint8List get seedHash;
   @override
-  String get seed;
+  Uint8List? get seed;
 
   /// Create a copy of HTLC
   /// with the given fields replaced by the non-null parameter values.

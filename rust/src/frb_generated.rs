@@ -332,10 +332,10 @@ fn wire__crate__api__wallet__wallet_build_lbtc_tx_impl(
 fn wire__crate__api__wallet__wallet_create_htlc_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::wallet::Wallet>,
-    receiver_pubkey: impl CstDecode<String>,
-    owner_pubkey: impl CstDecode<String>,
+    receiver_pubkey: impl CstDecode<Vec<u8>>,
+    owner_pubkey: impl CstDecode<Vec<u8>>,
     timeout: impl CstDecode<u32>,
-    seed_hash: impl CstDecode<String>,
+    seed_hash: impl CstDecode<Option<Vec<u8>>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -707,9 +707,9 @@ impl SseDecode for crate::api::types::HTLC {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_address = <String>::sse_decode(deserializer);
-        let mut var_redeemScript = <String>::sse_decode(deserializer);
-        let mut var_seedHash = <String>::sse_decode(deserializer);
-        let mut var_seed = <String>::sse_decode(deserializer);
+        let mut var_redeemScript = <Vec<u8>>::sse_decode(deserializer);
+        let mut var_seedHash = <Vec<u8>>::sse_decode(deserializer);
+        let mut var_seed = <Option<Vec<u8>>>::sse_decode(deserializer);
         return crate::api::types::HTLC {
             address: var_address,
             redeem_script: var_redeemScript,
@@ -817,6 +817,17 @@ impl SseDecode for Option<u32> {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
             return Some(<u32>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<u8>>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -1270,9 +1281,9 @@ impl SseEncode for crate::api::types::HTLC {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.address, serializer);
-        <String>::sse_encode(self.redeem_script, serializer);
-        <String>::sse_encode(self.seed_hash, serializer);
-        <String>::sse_encode(self.seed, serializer);
+        <Vec<u8>>::sse_encode(self.redeem_script, serializer);
+        <Vec<u8>>::sse_encode(self.seed_hash, serializer);
+        <Option<Vec<u8>>>::sse_encode(self.seed, serializer);
     }
 }
 
@@ -1369,6 +1380,16 @@ impl SseEncode for Option<u32> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <u32>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<u8>>::sse_encode(value, serializer);
         }
     }
 }

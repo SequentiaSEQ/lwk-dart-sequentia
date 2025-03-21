@@ -79,10 +79,10 @@ class Wallet {
           drain: drain);
 
   Future<HTLC> createHtlc(
-          {required String receiverPubkey,
-          required String ownerPubkey,
+          {required List<int> receiverPubkey,
+          required List<int> ownerPubkey,
           required int timeout,
-          required String seedHash}) =>
+          Uint8List? seedHash}) =>
       LwkCore.instance.api.crateApiWalletWalletCreateHtlc(
           that: this,
           receiverPubkey: receiverPubkey,

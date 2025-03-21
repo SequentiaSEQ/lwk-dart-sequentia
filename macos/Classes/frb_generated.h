@@ -161,8 +161,8 @@ void frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx(int64_t port_,
 
 void frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc(int64_t port_,
                                                              struct wire_cst_wallet *that,
-                                                             struct wire_cst_list_prim_u_8_strict *receiver_pubkey,
-                                                             struct wire_cst_list_prim_u_8_strict *owner_pubkey,
+                                                             struct wire_cst_list_prim_u_8_loose *receiver_pubkey,
+                                                             struct wire_cst_list_prim_u_8_loose *owner_pubkey,
                                                              uint32_t timeout,
                                                              struct wire_cst_list_prim_u_8_strict *seed_hash);
 

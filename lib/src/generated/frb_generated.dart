@@ -112,10 +112,10 @@ abstract class LwkCoreApi extends BaseApi {
 
   Future<HTLC> crateApiWalletWalletCreateHtlc(
       {required Wallet that,
-      required String receiverPubkey,
-      required String ownerPubkey,
+      required List<int> receiverPubkey,
+      required List<int> ownerPubkey,
       required int timeout,
-      required String seedHash});
+      Uint8List? seedHash});
 
   Future<PsetAmounts> crateApiWalletWalletDecodeTx(
       {required Wallet that, required String pset});
@@ -469,17 +469,17 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   @override
   Future<HTLC> crateApiWalletWalletCreateHtlc(
       {required Wallet that,
-      required String receiverPubkey,
-      required String ownerPubkey,
+      required List<int> receiverPubkey,
+      required List<int> ownerPubkey,
       required int timeout,
-      required String seedHash}) {
+      Uint8List? seedHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_wallet(that);
-        var arg1 = cst_encode_String(receiverPubkey);
-        var arg2 = cst_encode_String(ownerPubkey);
+        var arg1 = cst_encode_list_prim_u_8_loose(receiverPubkey);
+        var arg2 = cst_encode_list_prim_u_8_loose(ownerPubkey);
         var arg3 = cst_encode_u_32(timeout);
-        var arg4 = cst_encode_String(seedHash);
+        var arg4 = cst_encode_opt_list_prim_u_8_strict(seedHash);
         return wire.wire__crate__api__wallet__wallet_create_htlc(
             port_, arg0, arg1, arg2, arg3, arg4);
       },
@@ -825,9 +825,9 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return HTLC(
       address: dco_decode_String(arr[0]),
-      redeemScript: dco_decode_String(arr[1]),
-      seedHash: dco_decode_String(arr[2]),
-      seed: dco_decode_String(arr[3]),
+      redeemScript: dco_decode_list_prim_u_8_strict(arr[1]),
+      seedHash: dco_decode_list_prim_u_8_strict(arr[2]),
+      seed: dco_decode_opt_list_prim_u_8_strict(arr[3]),
     );
   }
 
@@ -900,6 +900,12 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
   }
 
   @protected
@@ -1104,9 +1110,9 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   HTLC sse_decode_htlc(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_address = sse_decode_String(deserializer);
-    var var_redeemScript = sse_decode_String(deserializer);
-    var var_seedHash = sse_decode_String(deserializer);
-    var var_seed = sse_decode_String(deserializer);
+    var var_redeemScript = sse_decode_list_prim_u_8_strict(deserializer);
+    var var_seedHash = sse_decode_list_prim_u_8_strict(deserializer);
+    var var_seed = sse_decode_opt_list_prim_u_8_strict(deserializer);
     return HTLC(
         address: var_address,
         redeemScript: var_redeemScript,
@@ -1207,6 +1213,17 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_u_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_prim_u_8_strict(deserializer));
     } else {
       return null;
     }
@@ -1451,9 +1468,9 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
   void sse_encode_htlc(HTLC self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.address, serializer);
-    sse_encode_String(self.redeemScript, serializer);
-    sse_encode_String(self.seedHash, serializer);
-    sse_encode_String(self.seed, serializer);
+    sse_encode_list_prim_u_8_strict(self.redeemScript, serializer);
+    sse_encode_list_prim_u_8_strict(self.seedHash, serializer);
+    sse_encode_opt_list_prim_u_8_strict(self.seed, serializer);
   }
 
   @protected
@@ -1541,6 +1558,17 @@ class LwkCoreApiImpl extends LwkCoreApiImplPlatform implements LwkCoreApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_u_32(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+      Uint8List? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_prim_u_8_strict(self, serializer);
     }
   }
 

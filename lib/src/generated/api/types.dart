@@ -64,9 +64,9 @@ class Blockchain {
 class HTLC with _$HTLC {
   const factory HTLC({
     required String address,
-    required String redeemScript,
-    required String seedHash,
-    required String seed,
+    required Uint8List redeemScript,
+    required Uint8List seedHash,
+    Uint8List? seed,
   }) = _HTLC;
 }
 

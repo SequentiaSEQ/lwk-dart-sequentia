@@ -510,8 +510,8 @@ pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx(
 pub extern "C" fn frbgen_lwk_wire__crate__api__wallet__wallet_create_htlc(
     port_: i64,
     that: *mut wire_cst_wallet,
-    receiver_pubkey: *mut wire_cst_list_prim_u_8_strict,
-    owner_pubkey: *mut wire_cst_list_prim_u_8_strict,
+    receiver_pubkey: *mut wire_cst_list_prim_u_8_loose,
+    owner_pubkey: *mut wire_cst_list_prim_u_8_loose,
     timeout: u32,
     seed_hash: *mut wire_cst_list_prim_u_8_strict,
 ) {

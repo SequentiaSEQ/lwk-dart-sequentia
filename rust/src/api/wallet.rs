@@ -211,17 +211,17 @@ impl Wallet {
 
     pub fn create_htlc(
         &self,
-        receiver_pubkey: String,
-        owner_pubkey: String,
+        receiver_pubkey: Vec<u8>,
+        owner_pubkey: Vec<u8>,
         timeout: u32,
-        seed_hash: String
+        seed_hash: Option<Vec<u8>>
     ) -> anyhow::Result<HTLC, LwkError> {
         let wallet = self.get_wallet()?;
         let htlc = wallet.create_htlc(
-            lwk_wollet::bitcoin::PublicKey::from_str(&receiver_pubkey).unwrap(),
-            lwk_wollet::bitcoin::PublicKey::from_str(&owner_pubkey).unwrap(),
+            lwk_wollet::bitcoin::PublicKey::from_slice(&receiver_pubkey).unwrap(),
+            lwk_wollet::bitcoin::PublicKey::from_slice(&owner_pubkey).unwrap(),
             timeout,
-            Some(Vec::<u8>::from_hex(&seed_hash).unwrap())
+            seed_hash
         )?;
         Ok(htlc.into())
     }
@@ -286,6 +286,8 @@ impl Wallet {
 #[cfg(test)]
 mod tests {
 
+    use lwk_wollet::hashes::hex::DisplayHex;
+
     use super::*;
     #[test]
     fn testable_wallets() {
@@ -336,16 +338,15 @@ mod tests {
         let desc = Descriptor::new_confidential(network, mnemonic.to_string()).unwrap();
         let wallet = Wallet::init(network, "/tmp/lwk".to_string(), desc).unwrap();
 
-        let receiver_pubkey = "028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d";
-        let owner_pubkey = "02e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf";
-        let seed_hash = "ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e";
-        let htlc =  wallet.create_htlc(receiver_pubkey.to_string(), owner_pubkey.to_string(), 10, seed_hash.to_string());
+        let receiver_pubkey = Vec::from_hex("028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d").unwrap();
+        let owner_pubkey =  Vec::from_hex("02e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf").unwrap();
+        let seed_hash =  Vec::from_hex("ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e").unwrap();
+        let htlc =  wallet.create_htlc(receiver_pubkey, owner_pubkey, 10, Some(seed_hash)).unwrap();
 
-        let result = htlc.unwrap();
-
-        assert_eq!(result.address, "2M4CKbjEmJDdGgrM7TkBRubVPxN9efb495W");
-        assert_eq!(result.redeem_script, "63a820ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e8821028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d675ab2752102e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf68ac");
-        assert_eq!(result.seed_hash, "ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e");
+        assert_eq!(htlc.address, "2M4CKbjEmJDdGgrM7TkBRubVPxN9efb495W");
+        assert_eq!(htlc.redeem_script.to_lower_hex_string(), "63a820ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e8821028af0e1d6ff3bb43c8161eb73ff91759a83dea9b9cbce9b60f09c8cc5cf880d0d675ab2752102e6aaef17549e6a375d0dd305b618a2d58168caadc9fd5e59f2b2b84368f73adf68ac");
+        assert_eq!(htlc.seed_hash.to_lower_hex_string(), "ed80f84ab619dadac421242053e794cf30781d65d6ce6ff509f75badbb688b3e");
+        assert_eq!(htlc.seed, None)
     }
 
     // #[test]

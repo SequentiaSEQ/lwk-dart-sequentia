@@ -331,18 +331,18 @@ impl Blockchain {
 #[frb(dart_metadata=("freezed"))]
 pub struct HTLC {
     pub address: String,
-    pub redeem_script: String,
-    pub seed_hash: String,
-    pub seed: String,
+    pub redeem_script: Vec<u8>,
+    pub seed_hash: Vec<u8>,
+    pub seed: Option<Vec<u8>>,
 }
 
 impl From<lwk_wollet::HTLC> for HTLC {
     fn from(htlc: lwk_wollet::HTLC) -> Self {
         HTLC {
             address: htlc.address,
-            redeem_script: htlc.redeem_script.to_hex(),
-            seed_hash: htlc.seed_hash.to_hex(),
-            seed: htlc.seed.unwrap_or_default().to_hex(),
+            redeem_script: htlc.redeem_script,
+            seed_hash: htlc.seed_hash,
+            seed: htlc.seed,
         }
     }
 }
