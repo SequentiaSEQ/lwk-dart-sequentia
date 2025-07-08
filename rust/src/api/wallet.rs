@@ -62,11 +62,9 @@ impl Wallet {
     pub fn sync(
         &self,
         electrum_url: String,
-        validate_domain: bool,
     ) -> anyhow::Result<(), LwkError> {
         let mut electrum_client: ElectrumClient =
-            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Tls(electrum_url, validate_domain))?;
-        // info!("{:?}", electrum_client.capabilities());
+            ElectrumClient::new(&lwk_wollet::ElectrumUrl::Plaintext(electrum_url))?;
         let mut wallet = self.get_wallet()?;
         match full_scan_with_electrum_client(&mut wallet, &mut electrum_client) {
             Ok(_) => Ok(()),
@@ -152,6 +150,7 @@ impl Wallet {
         out_address: String,
         fee_rate: f32,
         asset: String,
+        fee_asset: Option<String>
     ) -> anyhow::Result<String, LwkError> {
         let wallet = self.get_wallet()?;
         let tx_builder = wallet.tx_builder();
@@ -168,6 +167,7 @@ impl Wallet {
             .add_recipient(&address, sats, asset)?
             .enable_ct_discount()
             .fee_rate(Some(fee_rate))
+            .fee_asset(fee_asset)
             .finish()?;
         Ok(pset.to_string())
     }

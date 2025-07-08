@@ -273,6 +273,7 @@ pub struct Tx {
     pub outputs: Vec<TxOut>,
     pub inputs: Vec<TxOut>,
     pub fee: u64,
+    pub fee_asset: String,
     pub height: Option<u32>,
     pub unblinded_url: String,
     pub vsize: usize,
@@ -337,6 +338,7 @@ impl From<WalletTx> for Tx {
             outputs: outputs,
             inputs: inputs,
             fee: wallet_tx.fee.clone(),
+            fee_asset: wallet_tx.fee_asset.to_string().clone(),
             timestamp: wallet_tx.timestamp,
             height: wallet_tx.height,
             unblinded_url: wallet_tx.unblinded_url("").clone(),
@@ -360,7 +362,7 @@ impl From<PsetBalance> for PsetAmounts {
     }
 }
 
-#[frb(unignore)]
+// #[frb(unignore)]
 #[derive(Clone, Debug, PartialEq)]
 pub struct SizeAndFees {
     pub discounted_vsize: usize,

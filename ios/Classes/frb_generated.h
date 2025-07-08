@@ -87,6 +87,7 @@ typedef struct wire_cst_tx {
   struct wire_cst_list_tx_out *outputs;
   struct wire_cst_list_tx_out *inputs;
   uint64_t fee;
+  struct wire_cst_list_prim_u_8_strict *fee_asset;
   uint32_t *height;
   struct wire_cst_list_prim_u_8_strict *unblinded_url;
   uintptr_t vsize;
@@ -118,14 +119,6 @@ typedef struct wire_cst_size_and_fees {
   struct wire_cst_list_balance *absolute_fees;
 } wire_cst_size_and_fees;
 
-void frbgen_lwk_wire__crate__api__types__address_address_from_script(int64_t port_,
-                                                                     int32_t network,
-                                                                     struct wire_cst_list_prim_u_8_strict *script,
-                                                                     struct wire_cst_list_prim_u_8_strict *blinding_key);
-
-void frbgen_lwk_wire__crate__api__types__address_validate(int64_t port_,
-                                                          struct wire_cst_list_prim_u_8_strict *address_string);
-
 void frbgen_lwk_wire__crate__api__blockchain__blockchain_broadcast_signed_pset(int64_t port_,
                                                                                struct wire_cst_list_prim_u_8_strict *electrum_url,
                                                                                struct wire_cst_list_prim_u_8_strict *signed_pset);
@@ -148,6 +141,14 @@ void frbgen_lwk_wire__crate__api__transaction__extract_tx_bytes(int64_t port_,
 void frbgen_lwk_wire__crate__api__transaction__get_size_and_absolute_fees(int64_t port_,
                                                                           struct wire_cst_list_prim_u_8_strict *pset);
 
+void frbgen_lwk_wire__crate__api__types__address_address_from_script(int64_t port_,
+                                                                     int32_t network,
+                                                                     struct wire_cst_list_prim_u_8_strict *script,
+                                                                     struct wire_cst_list_prim_u_8_strict *blinding_key);
+
+void frbgen_lwk_wire__crate__api__types__address_validate(int64_t port_,
+                                                          struct wire_cst_list_prim_u_8_strict *address_string);
+
 void frbgen_lwk_wire__crate__api__wallet__wallet_address(int64_t port_,
                                                          struct wire_cst_wallet *that,
                                                          uint32_t index);
@@ -166,7 +167,8 @@ void frbgen_lwk_wire__crate__api__wallet__wallet_build_asset_tx(int64_t port_,
                                                                 uint64_t sats,
                                                                 struct wire_cst_list_prim_u_8_strict *out_address,
                                                                 float fee_rate,
-                                                                struct wire_cst_list_prim_u_8_strict *asset);
+                                                                struct wire_cst_list_prim_u_8_strict *asset,
+                                                                struct wire_cst_list_prim_u_8_strict *fee_asset);
 
 void frbgen_lwk_wire__crate__api__wallet__wallet_build_lbtc_tx(int64_t port_,
                                                                struct wire_cst_wallet *that,

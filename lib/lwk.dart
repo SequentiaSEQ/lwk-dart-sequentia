@@ -3,6 +3,7 @@ library lwk;
 
 // export './src/generated/frb_generated.dart';
 export './src/generated/api/descriptor.dart';
+export './src/generated/api/error.dart';
 export './src/generated/api/wallet.dart' show Wallet;
 export './src/generated/api/types.dart';
 export './src/generated/api/blockchain.dart';

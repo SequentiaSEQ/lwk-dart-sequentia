@@ -19,7 +19,7 @@ impl Descriptor {
         let script_variant = lwk_common::Singlesig::Wpkh;
         let blinding_variant = lwk_common::DescriptorBlindingKey::Slip77;
         let desc_str =
-            lwk_common::singlesig_desc(&signer, script_variant, blinding_variant, is_mainnet)?;
+            lwk_common::singlesig_desc(&signer, script_variant, blinding_variant)?;
         Ok(Descriptor {
             ct_descriptor: desc_str.to_string(),
         })
